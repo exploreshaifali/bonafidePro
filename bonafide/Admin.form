@@ -51,12 +51,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="add_new_userb" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="new_typeb" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="delete_typeb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="delete_typecb" min="-2" pref="124" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="delete_user_button" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="delete_typeb" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -64,7 +60,7 @@
                       <Component id="backb" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="356" max="32767" attributes="0"/>
+              <EmptySpace pref="297" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,13 +72,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="new_typeb" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="delete_typeb" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="delete_typecb" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-              </Group>
+              <Component id="delete_typeb" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="158" max="32767" attributes="0"/>
+              <Component id="delete_user_button" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="92" max="32767" attributes="0"/>
               <Component id="backb" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
@@ -122,22 +115,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="delete_typecb">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value=" "/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delete_typecbActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="delete_user_button">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete user"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delete_user_buttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

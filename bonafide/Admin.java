@@ -6,14 +6,11 @@
  */
 package bonafide;
 
-import java.sql.SQLException;
-
 public class Admin extends javax.swing.JFrame {
 
  
     public Admin() {
         initComponents();
-        delete_typecb.setVisible(false);
         try{ 
             Class.forName("org.sqlite.JDBC");
             con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
@@ -30,8 +27,7 @@ public class Admin extends javax.swing.JFrame {
         new_typeb = new javax.swing.JButton();
         delete_typeb = new javax.swing.JButton();
         backb = new javax.swing.JButton();
-        delete_typecb = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        delete_user_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         file_menu = new javax.swing.JMenu();
         edit_menu = new javax.swing.JMenu();
@@ -67,14 +63,12 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        delete_typecb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        delete_typecb.addActionListener(new java.awt.event.ActionListener() {
+        delete_user_button.setText("Delete user");
+        delete_user_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delete_typecbActionPerformed(evt);
+                delete_user_buttonActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Delete user");
 
         file_menu.setText("File");
         menubar.add(file_menu);
@@ -98,15 +92,12 @@ public class Admin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(add_new_userb)
                             .addComponent(new_typeb)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(delete_typeb)
-                                .addGap(41, 41, 41)
-                                .addComponent(delete_typecb, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(delete_user_button)
+                            .addComponent(delete_typeb)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(backb)))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,12 +107,10 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(new_typeb)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(delete_typeb)
-                    .addComponent(delete_typecb, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(delete_typeb)
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addComponent(delete_user_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(backb)
                 .addGap(48, 48, 48))
         );
@@ -145,44 +134,12 @@ private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 }//GEN-LAST:event_backbActionPerformed
 
 private void delete_typebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_typebActionPerformed
-    delete_typecb.setVisible(true);
-    try{
-        ps = con.prepareStatement("select typeName from type");
-        rs = ps.executeQuery();
-        while(rs.next())
-            delete_typecb.addItem(rs.getString("typeName")); 
-        rs.close();
-        ps.close();
-    }
-    catch(java.sql.SQLException e){
-        e.printStackTrace();
-          javax.swing.JOptionPane.showMessageDialog(null, "Problem in dispatching data from database");          
-          System.exit(30000); 
-        }  
-    
+    new DeleteType().setVisible(true); 
 }//GEN-LAST:event_delete_typebActionPerformed
 
-private void delete_typecbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_typecbActionPerformed
-    int ans = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure, want to delete "+delete_typecb.getSelectedItem()+"'");
-    if(ans == javax.swing.JOptionPane.YES_OPTION){
-        // delecting selected item!!
-    try{
-        ps = con.prepareStatement("delete from type where typeName is '" +delete_typecb.getSelectedItem().toString()+"'");
-        int n = ps.executeUpdate();
-        if(n > 0)
-            delete_typecb.addItem(rs.getString("typeName")); 
-        else{
-            javax.swing.JOptionPane.showMessageDialog(null, "No such type..");
-        }
-        ps.close();
-    }
-    catch(java.sql.SQLException e){
-        e.printStackTrace();
-          javax.swing.JOptionPane.showMessageDialog(null, "Problem in deleting data from database");          
-          System.exit(30000); 
-        }
-    }
-}//GEN-LAST:event_delete_typecbActionPerformed
+private void delete_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_user_buttonActionPerformed
+    new DeleteUser().setVisible(true); 
+}//GEN-LAST:event_delete_user_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,10 +181,9 @@ private void delete_typecbActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JButton add_new_userb;
     private javax.swing.JButton backb;
     private javax.swing.JButton delete_typeb;
-    private javax.swing.JComboBox delete_typecb;
+    private javax.swing.JButton delete_user_button;
     private javax.swing.JMenu edit_menu;
     private javax.swing.JMenu file_menu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar menubar;
     private javax.swing.JButton new_typeb;
     // End of variables declaration//GEN-END:variables
