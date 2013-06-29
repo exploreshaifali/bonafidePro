@@ -9,7 +9,7 @@ package bonafide;
  * @author ishant0
  */
 public class Connect {
-    public static java.sql.Connection getConnection(){
+    public java.sql.Connection getConnection(){
         try
         {
             Class.forName("org.sqlite.JDBC");
@@ -21,23 +21,30 @@ public class Connect {
          }
     }
     
-    public static void closeConnection(java.sql.Connection con, java.sql.PreparedStatement ps, java.sql.ResultSet rs){
+    public void closeConnection(java.sql.Connection con, java.sql.PreparedStatement ps, java.sql.ResultSet rs){
         try{
             if(rs != null)
                 rs.close();
-            ps.close();
-            con.close();
+            if(ps != null){
+                ps.close();
+            }
+            if(con != null){
+                con.close();
+            }
         }catch(Exception e){
              javax.swing.JOptionPane.showMessageDialog(null, "Problem in closing database. "+e);   
         }
     }
     
-    public static String splitJoin(String formate, String delimiter, String toAdd ){
+    public String splitJoin(String formate, String delimiter, String toAdd ){
+        String added = formate;
+        try{
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(java.util.regex.Pattern.quote(delimiter));
         String data[] = pattern.split(formate);
-        String added = data[0] +" "+toAdd+" "+data[1];
+        added = data[0] +" "+toAdd+" "+data[1];
         //System.out.println(added);
         return added;
+        }catch(Exception e){System.out.println(e+delimiter); return added;}
     }
     
     public static void confirmIt(){

@@ -9,12 +9,6 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        try{ 
-            Class.forName("org.sqlite.JDBC");
-            con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
-            } catch(Exception e){
-          javax.swing.JOptionPane.showMessageDialog(null, e);          
-        } 
     }
        
     /**
@@ -184,9 +178,10 @@ public class Login extends javax.swing.JFrame {
     private void loginbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbActionPerformed
 // create table "login"(userid string PRIMARY KEY, password string, name varchar2(90), contactnum bigint, isAdmin varchar(10));
         try{
+            c = new Connect();
+            con = c.getConnection();
             char ch[]= passwordtf.getPassword();
             String pass = new String(ch);
-            
             ps =con.prepareStatement("select * from login where userid = '"+useridtf.getText()+"' and pass = '"+pass+"'");
             rs = ps.executeQuery();
             
@@ -198,20 +193,17 @@ public class Login extends javax.swing.JFrame {
                     new Second().setVisible(true);
                 }
                 this.dispose();
+                c.closeConnection(con, ps, rs); 
             }
             
         else{
              javax.swing.JOptionPane.showMessageDialog(null, "wrong id or password");
         }
       } catch(Exception e){
-          javax.swing.JOptionPane.showMessageDialog(null, e);          
+          javax.swing.JOptionPane.showMessageDialog(null, "Problem in connection "+e);          
         }  
         finally{
-            try{
-                rs.close();
-                ps.close();
-                con.close();
-            }catch(Exception e){}
+            c.closeConnection(con, ps, rs); 
         }
             
     }//GEN-LAST:event_loginbActionPerformed
@@ -306,6 +298,7 @@ private void enterLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter
     private java.sql.Connection con;
     private java.sql.PreparedStatement ps;
     private java.sql.ResultSet rs;
+    private Connect c;
        
 
 }

@@ -149,8 +149,8 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
     if(isInitialsCorrect()){
     // Inserting Type and formate in type table..
     try{
-        
-        con = Connect.getConnection();
+        c = new Connect();
+        con = c.getConnection();
         
         ps =con.prepareStatement("insert into type (typeName, formate, requirements) values(?,?,?)");
         ps.setString(1, new_type_name);
@@ -173,7 +173,7 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
              javax.swing.JOptionPane.showMessageDialog(null, "problem in adding name and formate."+e);             
          }
     finally{
-        Connect.closeConnection(con, ps, null); 
+        c.closeConnection(con, ps, null); 
     }
     
     
@@ -181,7 +181,8 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
     //adding requirrements to requirements table, if count > 0:
     if(Requirements.getCount() > 0){
       try{
-        con = Connect.getConnection();
+          c = new Connect();
+        con = c.getConnection();
         
         ps = con.prepareStatement("insert into requirements(typeName, cgpaSgpa, address, feeStructure, year) values(?,?,?,?,?)");
         ps.setString(1,  new_type_name);
@@ -194,7 +195,7 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
           this.dispose();
       }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in adding requirements."+e);}
       finally{
-          Connect.closeConnection(con, ps, null); 
+          c.closeConnection(con, ps, null); 
       } 
     }
     
@@ -272,6 +273,7 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
 
     private java.sql.Connection con;
     private java.sql.PreparedStatement ps;
+    private Connect c;
     //private java.sql.Statement st;
     //private java.sql.ResultSet rs;
     private javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();

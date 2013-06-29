@@ -107,12 +107,13 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     //deleting all selected userids from database
     for(String s : all_selected){
         try{
-           con = Connect.getConnection();
+            c = new Connect();
+           con = c.getConnection();
            ps = con.prepareStatement("delete from login where userid = '"+s+"'");
            ps.executeUpdate();
         }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in deleting "+s+" from database."+e);}
         finally{
-            Connect.closeConnection(con, ps, null);
+            c.closeConnection(con, ps, null);
         }
     }
     javax.swing.JOptionPane.showMessageDialog(null, "Deleted "+total+" user from database.");
@@ -131,7 +132,8 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
   private void dynamicCheckboxes(){
       //code for fetching existing users and adding them all to checks and generating checkBoxes :)
       try{
-        con = Connect.getConnection();
+          c = new Connect();
+        con = c.getConnection();
       
         ps = con.prepareStatement("select userid from login");
         rs = ps.executeQuery();
@@ -147,7 +149,7 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     
       }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in fetching all users"+e);}
       finally{
-          Connect.closeConnection(con, ps, rs);
+          c.closeConnection(con, ps, rs);
       }
   }
     
@@ -194,6 +196,7 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private java.sql.Connection con;
     private java.sql.PreparedStatement ps;
     private java.sql.ResultSet rs;
+    private Connect c;
 
     private java.util.ArrayList <javax.swing.JCheckBox> checks;
     private int total = 0;

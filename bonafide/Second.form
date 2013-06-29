@@ -195,14 +195,9 @@
     <Component class="javax.swing.JComboBox" name="ctype_combo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="2">
             <StringItem index="0" value="Student bonafide"/>
-            <StringItem index="1" value="Character Certificate"/>
-            <StringItem index="2" value="Medium"/>
-            <StringItem index="3" value="CGPA/SGPA"/>
-            <StringItem index="4" value="Fee Structure"/>
-            <StringItem index="5" value="Passport"/>
-            <StringItem index="6" value="Visa"/>
+            <StringItem index="1" value=" "/>
           </StringArray>
         </Property>
       </Properties>
