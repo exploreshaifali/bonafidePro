@@ -237,15 +237,7 @@
     <Component class="javax.swing.JComboBox" name="course_combo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
-            <StringItem index="0" value="MCA (6 yrs)"/>
-            <StringItem index="1" value="M.Tech (5&amp;1/2 yrs)"/>
-            <StringItem index="2" value="MBA(MS) (5 yrs)"/>
-            <StringItem index="3" value="MBA (TA) (2 yrs)"/>
-            <StringItem index="4" value="MBA(APR) (2 yrs)"/>
-            <StringItem index="5" value="MBA(HA) (2 yrs)"/>
-            <StringItem index="6" value="B.COM(honours) (3 yrs)"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
     </Component>

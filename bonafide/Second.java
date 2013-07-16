@@ -1,23 +1,15 @@
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 package bonafide;
+
 import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Second extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Second
-     */
+//Constructor
     public Second() {
         initComponents();
         rollnumtf.requestFocus();
         certificateTypes();
+        getCourses();
         //ctype_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student bonafide", "Character Certificate", "Medium", "CGPA/SGPA", "Fee Structure", "Passport", "Visa" }));
     }
     @SuppressWarnings("unchecked")
@@ -91,8 +83,6 @@ public class Second extends javax.swing.JFrame {
         jLabel6.setText("Name");
 
         jLabel7.setText("Father's Name");
-
-        course_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MCA (6 yrs)", "M.Tech (5&1/2 yrs)", "MBA(MS) (5 yrs)", "MBA (TA) (2 yrs)", "MBA(APR) (2 yrs)", "MBA(HA) (2 yrs)", "B.COM(honours) (3 yrs)" }));
 
         sem_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
@@ -303,16 +293,48 @@ private void certificateTypes(){
         con = c.getConnection();
         ps = con.prepareStatement("select typeName from type");
         rs = ps.executeQuery();
-        java.util.ArrayList<String> typeNames = new java.util.ArrayList();
+        java.util.ArrayList<String> type_names = new java.util.ArrayList();
         while(rs.next()){
-            typeNames.add(rs.getString("typeName"));
+            type_names.add(rs.getString("typeName"));
         }
-        ctype_combo.setModel(new javax.swing.DefaultComboBoxModel(typeNames.toArray(new String[0]))); 
+        ctype_combo.setModel(new javax.swing.DefaultComboBoxModel(type_names.toArray(new String[0]))); 
         c.closeConnection(con, ps, rs); 
     }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in showing Certificate types"+e);}
     finally{ c.closeConnection(con, ps, rs); 
     }
 }
+
+//method to set all courses from database table :
+private void getCourses(){
+    //fetching all types from type table
+    try{
+        c = new Connect();
+        con = c.getConnection();
+        ps = con.prepareStatement("select name from course");
+        rs = ps.executeQuery();
+        java.util.ArrayList<String> type_names = new java.util.ArrayList();
+        while(rs.next()){
+            type_names.add(rs.getString("name"));
+        }
+        course_combo.setModel(new javax.swing.DefaultComboBoxModel(type_names.toArray(new String[0]))); 
+        c.closeConnection(con, ps, rs); 
+    }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in showing Courses"+e);}
+    finally{ c.closeConnection(con, ps, rs); 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
        
     /**
      * @param args the command line arguments

@@ -4,9 +4,9 @@
  */
 
 /*
- * DeleteType.java
+ * DeleteCourse.java
  *
- * Created on Jun 25, 2013, 1:31:27 AM
+ * Created on Jul 16, 2013, 7:05:49 AM
  */
 package bonafide;
 
@@ -14,10 +14,10 @@ package bonafide;
  *
  * @author ishant0
  */
-public class DeleteType extends javax.swing.JFrame {
+public class DeleteCourse extends javax.swing.JFrame {
 
-    /** Creates new form DeleteType */
-    public DeleteType() {
+    /** Creates new form DeleteCourse */
+    public DeleteCourse() {
         initComponents();
         checks = new java.util.ArrayList();
         dynamicCheckboxes();
@@ -33,20 +33,13 @@ public class DeleteType extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        back_button = new javax.swing.JButton();
         delete_button = new javax.swing.JButton();
+        back_button = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Delete which type");
-
-        back_button.setText("Back");
-        back_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                back_buttonActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Delete which courses:");
 
         delete_button.setText("Delete");
         delete_button.addActionListener(new java.awt.event.ActionListener() {
@@ -55,36 +48,50 @@ public class DeleteType extends javax.swing.JFrame {
             }
         });
 
-        panel.setLayout(new java.awt.GridLayout());
+        back_button.setText("Back");
+        back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 361, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 171, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(back_button)
-                        .addGap(38, 38, 38)
-                        .addComponent(delete_button)
-                        .addGap(157, 157, 157))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(350, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(446, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(back_button)
+                        .addGap(121, 121, 121)
+                        .addComponent(delete_button)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back_button)
                     .addComponent(delete_button))
@@ -94,12 +101,8 @@ public class DeleteType extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
-    new Admin().setVisible(true); 
-}//GEN-LAST:event_back_buttonActionPerformed
-
 private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-   //getting those types which are selected to be deleted and storing them in all_selected
+//getting those courses which are selected to be deleted and storing them in all_selected
     java.util.ArrayList <String> all_selected= new java.util.ArrayList();
    //loop through the array of checkboxes and get the text of each checkbox that is checked
    for (javax.swing.JCheckBox ck:checks){
@@ -108,16 +111,16 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
    }
    total = all_selected.size();
-   if(total == 0){javax.swing.JOptionPane.showMessageDialog(null,"select the type names you want to delete");}
+   if(total == 0){javax.swing.JOptionPane.showMessageDialog(null,"select the courses name you want to delete.");}
    else{
        String message = "";
        if(total == 1){
-           message = "Want to delete 1 type only?";
+           message = "Want to delete 1 course only?";
        }
        else{
-           message = "Want to delete "+total+" types?";
+           message = "Want to delete "+total+" courses?";
        }
-       int reply = javax.swing.JOptionPane.showConfirmDialog(null, message,"Delete certificate type", javax.swing.JOptionPane.YES_NO_OPTION);
+       int reply = javax.swing.JOptionPane.showConfirmDialog(null, message,"Delete Course", javax.swing.JOptionPane.YES_NO_OPTION);
        if(reply == javax.swing.JOptionPane.YES_OPTION){
         //deleting all selected userids from database
         for(String s : all_selected){
@@ -129,7 +132,7 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db", config.toProperties());
                 
             //con.execute("PRAGMA foreign_keys = ON");
-            ps = con.prepareStatement("delete from type where typeName = '"+s+"'");
+            ps = con.prepareStatement("delete from course where name = '"+s+"'");
             ps.executeUpdate();
             }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in deleting "+s+" from database."+e);}
             finally{
@@ -137,11 +140,15 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 c.closeConnection(con, ps, null);
             }
         }
-         javax.swing.JOptionPane.showMessageDialog(null, "Deleted "+total+" types from database.");
+         javax.swing.JOptionPane.showMessageDialog(null, "Deleted "+total+" courses from database.");
     this.dispose();
    }
  }
 }//GEN-LAST:event_delete_buttonActionPerformed
+
+private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
+    new Admin().setVisible(true); 
+}//GEN-LAST:event_back_buttonActionPerformed
 
     
     private void dynamicCheckboxes(){
@@ -150,24 +157,27 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
           c = new Connect();
         con = c.getConnection();
       
-        ps = con.prepareStatement("select typeName from type");
+        ps = con.prepareStatement("select name from course");
         rs = ps.executeQuery();
         panel.setLayout(new java.awt.GridLayout(4,4,5,10));
         while(rs.next()){
-                javax.swing.JCheckBox box = new javax.swing.JCheckBox(rs.getString("typeName"));  
+                javax.swing.JCheckBox box = new javax.swing.JCheckBox(rs.getString("name"));  
                 panel.add(box);
                 checks.add(box); 
                 panel.revalidate();
                 panel.repaint();
-                pack();            
+                pack();                
         }
-    
-      }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in fetching all certificate types."+e);}
+        c.closeConnection(con, ps, rs);    
+      }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in fetching all courses. "+e);}
       finally{
           c.closeConnection(con, ps, rs);
       }
   }
     
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -182,13 +192,13 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteType.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteType.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteType.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteType.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -196,7 +206,7 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new DeleteType().setVisible(true);
+                new DeleteCourse().setVisible(true);
             }
         });
     }
@@ -213,4 +223,5 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     
     private java.util.ArrayList <javax.swing.JCheckBox> checks;
     private int total = 0;
+
 }

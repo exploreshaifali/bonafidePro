@@ -28,6 +28,8 @@ public class Admin extends javax.swing.JFrame {
         delete_typeb = new javax.swing.JButton();
         backb = new javax.swing.JButton();
         delete_user_button = new javax.swing.JButton();
+        add_course_button = new javax.swing.JButton();
+        delete_course_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         file_menu = new javax.swing.JMenu();
         edit_menu = new javax.swing.JMenu();
@@ -70,6 +72,20 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        add_course_button.setText("Add Course");
+        add_course_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_course_buttonActionPerformed(evt);
+            }
+        });
+
+        delete_course_button.setText("Delete Course");
+        delete_course_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_course_buttonActionPerformed(evt);
+            }
+        });
+
         file_menu.setText("File");
         menubar.add(file_menu);
 
@@ -90,29 +106,43 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(add_new_userb)
-                            .addComponent(new_typeb)
                             .addComponent(delete_user_button)
-                            .addComponent(delete_typeb)))
+                            .addComponent(delete_typeb)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(add_new_userb)
+                                    .addComponent(new_typeb))
+                                .addGap(66, 66, 66)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(delete_course_button)
+                                    .addComponent(add_course_button)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(backb)))
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(add_new_userb)
-                .addGap(18, 18, 18)
-                .addComponent(new_typeb)
-                .addGap(27, 27, 27)
-                .addComponent(delete_typeb)
-                .addGap(29, 29, 29)
-                .addComponent(delete_user_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(backb)
-                .addGap(48, 48, 48))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_new_userb)
+                    .addComponent(add_course_button))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(new_typeb)
+                        .addGap(27, 27, 27)
+                        .addComponent(delete_typeb)
+                        .addGap(29, 29, 29)
+                        .addComponent(delete_user_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(backb)
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(delete_course_button)
+                        .addContainerGap())))
         );
 
         pack();
@@ -135,11 +165,23 @@ private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 
 private void delete_typebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_typebActionPerformed
     new DeleteType().setVisible(true); 
+    this.dispose();
 }//GEN-LAST:event_delete_typebActionPerformed
 
 private void delete_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_user_buttonActionPerformed
     new DeleteUser().setVisible(true); 
+    this.dispose();
 }//GEN-LAST:event_delete_user_buttonActionPerformed
+
+private void add_course_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_course_buttonActionPerformed
+    new AddNewCourse().setVisible(true);
+    this.dispose();
+}//GEN-LAST:event_add_course_buttonActionPerformed
+
+private void delete_course_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_course_buttonActionPerformed
+    new DeleteCourse().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_delete_course_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,9 +219,11 @@ private void delete_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add_course_button;
     private javax.swing.JMenu add_menu;
     private javax.swing.JButton add_new_userb;
     private javax.swing.JButton backb;
+    private javax.swing.JButton delete_course_button;
     private javax.swing.JButton delete_typeb;
     private javax.swing.JButton delete_user_button;
     private javax.swing.JMenu edit_menu;

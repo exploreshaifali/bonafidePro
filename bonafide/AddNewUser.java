@@ -19,6 +19,7 @@ public class AddNewUser extends javax.swing.JFrame {
     /** Creates new form AddNewUser */
     public AddNewUser() {
         initComponents();
+        useridtf.requestFocus();
     }
 
     /** This method is called from within the constructor to
@@ -202,6 +203,7 @@ private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     useridtf.setText("");
     passwordtf.setText("");
     nametf.setText("");
+    useridtf.requestFocus();
 }//GEN-LAST:event_reset_buttonActionPerformed
 
 private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed

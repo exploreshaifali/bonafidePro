@@ -29,4 +29,19 @@ public class Validations {
            return false;
        }
     }
+    
+    public boolean isFloat(String s){
+        boolean r = true;
+        for(int i = 0; i <s.length(); i++){
+            char c = s.charAt(i);
+            if(Character.isDigit(c) || (c == '.')){
+                continue;
+            }
+            else{
+                r = false;
+                break;
+            }
+        }
+        return r;
+    }
 }
