@@ -13,6 +13,7 @@ public class AllRequired extends javax.swing.JFrame {
     
     public AllRequired(SecondClass sc) {
         this.sc = sc;
+        this.setTitle("All Required");
         initComponents();
     }
 
@@ -220,7 +221,7 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 //for generating certificate..
 private void generate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_buttonActionPerformed
     //creating object of class allRequiredClass
-    AllRequiredClass rc = new AllRequiredClass(addmission_year_tf.getText(), completion_year_tf.getText(), Float.parseFloat(cgpa_tf.getText()), Float.parseFloat(sgpa_tf.getText()),Integer.parseInt(in_sem.getSelectedItem().toString()), Integer.parseInt(pursuing_sem.getSelectedItem().toString()),local_address_ta.getText(), permanent_address_ta.getText(), birth_date_tf.getText(),birth_place_tf.getText());
+    AllRequiredClass rc = new AllRequiredClass(Integer.parseInt(addmission_year_tf.getText()), Integer.parseInt(completion_year_tf.getText()), Float.parseFloat(cgpa_tf.getText()), Float.parseFloat(sgpa_tf.getText()),Integer.parseInt(in_sem.getSelectedItem().toString()), Integer.parseInt(pursuing_sem.getSelectedItem().toString()),local_address_ta.getText(), permanent_address_ta.getText(), birth_date_tf.getText(),birth_place_tf.getText());
     //validations
     //creating certificate
     new CreateCertificate().create(sc, rc); 

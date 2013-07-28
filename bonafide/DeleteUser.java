@@ -21,6 +21,7 @@ public class DeleteUser extends javax.swing.JFrame {
     /** Creates new form DeleteUser */
     public DeleteUser() {
         initComponents();
+        this.setTitle("Delete User"); 
         checks = new java.util.ArrayList<>();
         dynamicCheckboxes();
     }

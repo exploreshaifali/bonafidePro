@@ -19,7 +19,8 @@ public class ChangePassword extends javax.swing.JFrame {
     /** Creates new form ChangePassword */
     public ChangePassword() {
         initComponents();
-        passpf.requestFocus();
+        this.setTitle("Change Password");
+        pass_pf.requestFocus();
         try{ 
             Class.forName("org.sqlite.JDBC");
             con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
@@ -33,16 +34,16 @@ public class ChangePassword extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        passpf = new javax.swing.JPasswordField();
+        pass_pf = new javax.swing.JPasswordField();
         backb = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Enter old password");
 
-        passpf.addActionListener(new java.awt.event.ActionListener() {
+        pass_pf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passpfActionPerformed(evt);
+                pass_pfActionPerformed(evt);
             }
         });
 
@@ -62,7 +63,7 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addComponent(passpf, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pass_pf, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(jLabel1))
@@ -79,16 +80,16 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(passpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pass_pf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void passpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passpfActionPerformed
+private void pass_pfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass_pfActionPerformed
     try{   
-            char ch[]= passpf.getPassword();
+            char ch[]= pass_pf.getPassword();
             String pass = new String(ch);
             
             ps =con.prepareStatement("select * from login where pass = '"+pass+"'");
@@ -100,12 +101,12 @@ private void passpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             }
            else{
             javax.swing.JOptionPane.showMessageDialog(null, "Wrong password");
-            passpf.setText("");
+            pass_pf.setText("");
           }
             } catch(Exception e){
           javax.swing.JOptionPane.showMessageDialog(null, e);          
         }  
-}//GEN-LAST:event_passpfActionPerformed
+}//GEN-LAST:event_pass_pfActionPerformed
 
 private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbActionPerformed
     Second ob = new Second();
@@ -151,7 +152,7 @@ private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField passpf;
+    private javax.swing.JPasswordField pass_pf;
     // End of variables declaration//GEN-END:variables
     java.sql.Connection con;
     java.sql.PreparedStatement ps;

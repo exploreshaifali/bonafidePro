@@ -54,24 +54,21 @@ public class SecondClass {
         return semester;
     }
 
-    public String getRequie_address() {
-        return requie_address;
+    public String getRequire_address() {
+        return require_address;
     }
 
-    public String getRequie_cgpa() {
-        return requie_cgpa;
+    public String getRequire_cgpa() {
+        return require_cgpa;
     }
 
-    public String getRequie_fee() {
-        return requie_fee;
+    public String getRequire_fee() {
+        return require_fee;
     }
 
-    public String getRequie_year() {
-        return requie_year;
-    }
-    
-    
-    
+    public String getRequire_year() {
+        return require_year;
+    }    
     //setter methods
     public void setCert_type(String cert_type) {
         this.cert_type = cert_type;
@@ -143,30 +140,36 @@ public class SecondClass {
            rs.next();
            if(rs.getString("requirements").equals("n")){
                System.out.println("not any requirements:)"); 
+               c.closeConnection(null, ps, rs);
                CreateCertificate cc = new CreateCertificate();
                cc.create(sc, null); 
            }
            else{
-               //Step-2closing connection with type and connecting with requirements table.
-               c.closeConnection(null, ps, rs); 
-               
+               //Step-2closing connection with type and connecting with requirements table.                          
+               c.closeConnection(null, ps, rs);
                ps = con.prepareStatement("select * from requirements where typeName = '"+cert_type+"'");
                rs = ps.executeQuery();
-               requie_cgpa = rs.getString("cgpaSgpa");
-               requie_address = rs.getString("address");
-               requie_fee = rs.getString("feeStructure");
-               requie_year = rs.getString("year");
+               require_cgpa = rs.getString("cgpaSgpa");
+               require_address = rs.getString("address");
+               require_fee = rs.getString("feeStructure");
+               require_year = rs.getString("year");
+               c.closeConnection(con, ps, rs); 
                //System.out.println("requirements are "+cgpa+address+fee+year);
-               if((requie_cgpa.equals("y") & requie_address.equals("y")) || (requie_cgpa.equals("y") & requie_year.equals("y")) || (requie_year.equals("y") & requie_address.equals("y"))){
+               if(require_fee.equals("y") & require_address.equals("n") & require_cgpa.equals("n") & require_year.equals("n")) {
+                   System.out.println("Only fee structure required. ");
+                   CreateCertificate cc = new CreateCertificate();
+                   cc.create(sc, null);
+               }
+               else if((require_cgpa.equals("y") & require_address.equals("y")) || (require_cgpa.equals("y") & require_year.equals("y")) || (require_year.equals("y") & require_address.equals("y"))){
                    new AllRequired(sc).setVisible(true); 
                }
-               else if(requie_cgpa.equals("y")){
+               else if(require_cgpa.equals("y")){
                    new CGPA(sc).setVisible(true);
                }
-               else if(requie_address.equals("y")){
+               else if(require_address.equals("y")){
                    new Address(sc).setVisible(true);
                }
-               else if(requie_year.equals("y")){
+               else if(require_year.equals("y")){
                    new YearOnly(sc).setVisible(true);
                }
                else{
@@ -178,14 +181,7 @@ public class SecondClass {
        catch(Exception ex){JOptionPane.showMessageDialog(null, ex);}
        finally{c.closeConnection(con, ps, rs);}         
   
-    }
-    
-    
-    
-    
-    
-    
-    
+    }   
     //declaring variables
     protected String name;
     protected String rollnum;
@@ -200,8 +196,8 @@ public class SecondClass {
    private ResultSet rs;
    private Connect c;
    
-   private String requie_cgpa;
-   private String requie_address;
-   private String requie_fee;
-   private String requie_year;
+   private String require_cgpa;
+   private String require_address;
+   private String require_fee;
+   private String require_year;
 }

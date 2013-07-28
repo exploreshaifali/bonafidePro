@@ -14,14 +14,19 @@ public class AddNewCourseClass {
     public AddNewCourseClass() {
     }
 
-    public AddNewCourseClass(String course_name, String fullform, float years) {
+    public AddNewCourseClass(String course_name, String fullform, String years, int sem) {
         this.course_name = course_name;
         this.fullform = fullform;
         this.years = years;
+        this.sem = sem;
     }
     //Getter methods
     public String getCourse_name() {
         return course_name;
+    }
+
+    public int getSem() {
+        return sem;
     }
 
     public String getFullform() {
@@ -36,13 +41,13 @@ public class AddNewCourseClass {
         this.fullform = fullform;
     }
 
-    public void setYears(float years) {
+    public void setYears(String years) {
         this.years = years;
     }       
     //validations for emptyness
     public boolean isEmpty(){
         Validations v = new Validations();
-        if(v.isEmpty(course_name) || v.isEmpty(fullform) || v.isEmpty(years)){
+        if(v.isEmpty(course_name) || v.isEmpty(fullform) || v.isEmpty(years) || (v.isEmpty(sem))){ 
             return true;
         }
         else{
@@ -52,7 +57,7 @@ public class AddNewCourseClass {
     //validatins -- fullform can't have digits
     public boolean fullformContainsDigit(){
         Validations v = new Validations();
-        if(v.contaionsDigit(Float.toString(years))){ 
+        if(v.contaionsDigit(years)){ 
             return true;
         }
         else{
@@ -64,7 +69,7 @@ public class AddNewCourseClass {
         try{
         c = new Connect();
         con = c.getConnection();
-        ps = con.prepareStatement("insert into course values('"+course_name+"', '"+fullform+"', "+years+")");
+        ps = con.prepareStatement("insert into course values('"+course_name+"', '"+fullform+"', '"+years+"' , "+sem+")");
         ps.executeUpdate();
         c.closeConnection(con, ps, rs);
         javax.swing.JOptionPane.showMessageDialog(null, "Course "+course_name+" is added!!");
@@ -75,7 +80,8 @@ public class AddNewCourseClass {
     //variables
     private String course_name;
     private String fullform;
-    private float years;
+    private String years;
+    private int sem;
     
    private Connection con;
    private PreparedStatement ps;

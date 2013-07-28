@@ -19,6 +19,7 @@ public class DeleteCourse extends javax.swing.JFrame {
     /** Creates new form DeleteCourse */
     public DeleteCourse() {
         initComponents();
+        this.setTitle("Delete Course");         
         checks = new java.util.ArrayList();
         dynamicCheckboxes();
     }
@@ -123,7 +124,7 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
        int reply = javax.swing.JOptionPane.showConfirmDialog(null, message,"Delete Course", javax.swing.JOptionPane.YES_NO_OPTION);
        if(reply == javax.swing.JOptionPane.YES_OPTION){
         //deleting all selected userids from database
-        for(String s : all_selected){
+        for(String one_selected_course : all_selected){
             try{
                 Class.forName("org.sqlite.JDBC");
                 //code to enable foreign key constratints on sqlite3:
@@ -132,16 +133,17 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db", config.toProperties());
                 
             //con.execute("PRAGMA foreign_keys = ON");
-            ps = con.prepareStatement("delete from course where name = '"+s+"'");
+            ps = con.prepareStatement("delete from course where name = '"+one_selected_course+"'");
             ps.executeUpdate();
-            }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in deleting "+s+" from database."+e);}
+            }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in deleting "+one_selected_course+" from database."+e);}
             finally{
                 c = new Connect();
                 c.closeConnection(con, ps, null);
             }
         }
          javax.swing.JOptionPane.showMessageDialog(null, "Deleted "+total+" courses from database.");
-    this.dispose();
+         new Admin().setVisible(true); 
+         this.dispose();
    }
  }
 }//GEN-LAST:event_delete_buttonActionPerformed

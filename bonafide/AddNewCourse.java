@@ -19,6 +19,8 @@ public class AddNewCourse extends javax.swing.JFrame {
     /** Creates new form AddNewCourse */
     public AddNewCourse() {
         initComponents();
+        this.setTitle("Add New Course");
+        course_name_tf.requestFocus();
     }   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,6 +36,8 @@ public class AddNewCourse extends javax.swing.JFrame {
         course_name_tf = new javax.swing.JTextField();
         fullform_tf = new javax.swing.JTextField();
         years_tf = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        sem_tf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,14 @@ public class AddNewCourse extends javax.swing.JFrame {
 
         jLabel3.setText("Period(Years)");
 
+        jLabel4.setText("semesters");
+
+        sem_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sem_tfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,13 +104,15 @@ public class AddNewCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(fullform_tf)
                         .addComponent(course_name_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                    .addComponent(years_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(years_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sem_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,7 +135,11 @@ public class AddNewCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(years_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(sem_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_button)
                     .addComponent(reset_button))
@@ -135,32 +153,38 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     //checking wether year is a float or not
     Validations v = new Validations();
     String year = years_tf.getText();     
-    if(v.isFloat(year)){
-    AddNewCourseClass co = new AddNewCourseClass(course_name_tf.getText(), fullform_tf.getText(), Float.parseFloat(year)); 
-    //checking wether fields are empty 
-    if(co.isEmpty()){
-        javax.swing.JOptionPane.showMessageDialog(null, "All fields are required!");
-    }
-    else{
-        /*if(co.fullformContainsDigit()){
-            javax.swing.JOptionPane.showMessageDialog(null, "Full Form of Course can only have alphabates.");
-        }
-        else{
-         * 
-         */
+    if(v.isVallidYear(year)){
+        //checking wether sem is a number or not:
+        String sem = sem_tf.getText();
+        if(v.onlyDigits(sem)){
+            AddNewCourseClass co = new AddNewCourseClass(course_name_tf.getText(), fullform_tf.getText(), year, Integer.parseInt(sem));  
+            //checking wether fields are empty 
+            if(co.isEmpty()){
+                javax.swing.JOptionPane.showMessageDialog(null, "All fields are required!");
+            }
+            else{
+            /*if(co.fullformContainsDigit()){
+                javax.swing.JOptionPane.showMessageDialog(null, "Full Form of Course can only have alphabates.");
+            }
+            else{
+            * 
+            */
             co.putDataIntoDatabase();
-        //}
+            new Admin().setVisible(true); 
+            this.dispose();
+            //}
+            }
+        }  
+        else{javax.swing.JOptionPane.showMessageDialog(null, "Semesters can only have numbers.");}
     }
-}
-else{
-        javax.swing.JOptionPane.showMessageDialog(null, "Years can only have numbers/floats.");
-}
+    else{javax.swing.JOptionPane.showMessageDialog(null, "Years can only have numbers/floats.");}
 }//GEN-LAST:event_add_buttonActionPerformed
 
 private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_buttonActionPerformed
     course_name_tf.setText("");
     fullform_tf.setText("");
     years_tf.setText("");
+    sem_tf.setText(""); 
     course_name_tf.requestFocus();
 }//GEN-LAST:event_reset_buttonActionPerformed
 
@@ -173,6 +197,10 @@ private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     new Login().setVisible(true);
     this.dispose();
 }//GEN-LAST:event_logout_buttonActionPerformed
+
+private void sem_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sem_tfActionPerformed
+    add_buttonActionPerformed(evt);
+}//GEN-LAST:event_sem_tfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,8 +245,10 @@ private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton logout_button;
     private javax.swing.JButton reset_button;
+    private javax.swing.JTextField sem_tf;
     private javax.swing.JTextField years_tf;
     // End of variables declaration//GEN-END:variables
 }

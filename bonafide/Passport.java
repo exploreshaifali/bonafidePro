@@ -15,6 +15,8 @@ public class Passport extends javax.swing.JFrame {
      */
     public Passport() {
         initComponents();
+        this.setTitle("Passport");
+        local_address_ta.requestFocus();
     }
 
     /**

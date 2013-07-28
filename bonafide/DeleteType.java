@@ -19,6 +19,7 @@ public class DeleteType extends javax.swing.JFrame {
     /** Creates new form DeleteType */
     public DeleteType() {
         initComponents();
+        this.setTitle("Delete Certificatge Type");
         checks = new java.util.ArrayList();
         dynamicCheckboxes();
     }
@@ -138,7 +139,8 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             }
         }
          javax.swing.JOptionPane.showMessageDialog(null, "Deleted "+total+" types from database.");
-    this.dispose();
+         new Admin().setVisible(true); 
+         this.dispose();
    }
  }
 }//GEN-LAST:event_delete_buttonActionPerformed

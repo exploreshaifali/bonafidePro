@@ -8,7 +8,8 @@ public class NewPassword extends javax.swing.JFrame {
     /** Creates new form NewPassword */
     public NewPassword() {
         initComponents();
-        pf1.requestFocus();
+        this.setTitle("New PAssword"); 
+        new_password_pf.requestFocus();
         try{ 
             Class.forName("org.sqlite.JDBC");
             con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
@@ -22,7 +23,7 @@ public class NewPassword extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        pf1 = new javax.swing.JPasswordField();
+        new_password_pf = new javax.swing.JPasswordField();
         pf2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,7 +50,7 @@ public class NewPassword extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pf2)
-                    .addComponent(pf1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addComponent(new_password_pf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -58,7 +59,7 @@ public class NewPassword extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(pf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(new_password_pf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
@@ -71,9 +72,9 @@ public class NewPassword extends javax.swing.JFrame {
 
 private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
 
-     if(Arrays.equals(pf1.getPassword(), pf2.getPassword())){
+     if(Arrays.equals(new_password_pf.getPassword(), pf2.getPassword())){
          try{
-             ps = con.prepareStatement("update login set pass = '"+pf1.getPassword().toString()+"'");
+             ps = con.prepareStatement("update login set pass = '"+new_password_pf.getPassword().toString()+"'");
              ps.close();
              JOptionPane.showMessageDialog(null, "New password set successfully");
              this.dispose();
@@ -85,9 +86,9 @@ private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
       else{
         //System.out.print("Enter again");
          JOptionPane.showMessageDialog(null, "Enter Again");
-        pf1.setText("");
+        new_password_pf.setText("");
         pf2.setText("");
-        pf1.requestFocus();
+        new_password_pf.requestFocus();
       }
 }//GEN-LAST:event_DUMMY
 
@@ -127,7 +128,7 @@ private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField pf1;
+    private javax.swing.JPasswordField new_password_pf;
     private javax.swing.JPasswordField pf2;
     // End of variables declaration//GEN-END:variables
     private java.sql.Connection con;

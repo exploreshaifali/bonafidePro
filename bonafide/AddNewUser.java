@@ -19,7 +19,8 @@ public class AddNewUser extends javax.swing.JFrame {
     /** Creates new form AddNewUser */
     public AddNewUser() {
         initComponents();
-        useridtf.requestFocus();
+        this.setTitle("Add New User");
+        userid_tf.requestFocus();
     }
 
     /** This method is called from within the constructor to
@@ -35,7 +36,7 @@ public class AddNewUser extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         useridl = new javax.swing.JLabel();
         passwoedl = new javax.swing.JLabel();
-        useridtf = new javax.swing.JTextField();
+        userid_tf = new javax.swing.JTextField();
         passwordtf = new javax.swing.JPasswordField();
         add_button = new javax.swing.JToggleButton();
         namel = new javax.swing.JLabel();
@@ -116,7 +117,7 @@ public class AddNewUser extends javax.swing.JFrame {
                                     .addGap(29, 29, 29))
                                 .addComponent(nametf)
                                 .addComponent(passwordtf, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(useridtf, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
+                            .addComponent(userid_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(back_button)))
@@ -137,7 +138,7 @@ public class AddNewUser extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(logout_button)
                         .addGap(20, 20, 20)
-                        .addComponent(useridtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(userid_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +168,7 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             String s = new String(ch);
             //System.out.print(s);
             ps =con.prepareStatement("insert into login (userid, pass, name, isAdmin) values(?,?,?,?)");
-            ps.setString(1, useridtf.getText());
+            ps.setString(1, userid_tf.getText());
             ps.setString(2, s);
             ps.setString(3, nametf.getText());
             ps.setString(4, "no");
@@ -185,7 +186,7 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
              * 
              */
             System.out.println(e);
-            javax.swing.JOptionPane.showMessageDialog(null, useridtf.getText()+" user already exists!.");
+            javax.swing.JOptionPane.showMessageDialog(null, userid_tf.getText()+" user already exists!.");
         }
         catch(Exception e){
           e.printStackTrace();
@@ -200,10 +201,10 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_back_buttonActionPerformed
 
 private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_buttonActionPerformed
-    useridtf.setText("");
+    userid_tf.setText("");
     passwordtf.setText("");
     nametf.setText("");
-    useridtf.requestFocus();
+    userid_tf.requestFocus();
 }//GEN-LAST:event_reset_buttonActionPerformed
 
 private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
@@ -257,7 +258,7 @@ private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JLabel passwoedl;
     private javax.swing.JPasswordField passwordtf;
     private javax.swing.JButton reset_button;
+    private javax.swing.JTextField userid_tf;
     private javax.swing.JLabel useridl;
-    private javax.swing.JTextField useridtf;
     // End of variables declaration//GEN-END:variables
 }

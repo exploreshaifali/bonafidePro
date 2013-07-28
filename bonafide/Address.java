@@ -19,11 +19,15 @@ public class Address extends javax.swing.JFrame {
     /** Creates new form Address */
     public Address() {
         initComponents();
+        this.setTitle("Address");
+        local_ta.requestFocus();
     }
 
     public Address(SecondClass sc) {
         this.sc = sc;
         initComponents();
+        this.setTitle("Address");
+        local_ta.requestFocus();
     }
     
 

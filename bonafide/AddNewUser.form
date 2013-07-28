@@ -71,7 +71,7 @@
                               <Component id="nametf" alignment="0" max="32767" attributes="1"/>
                               <Component id="passwordtf" alignment="0" min="-2" pref="144" max="-2" attributes="1"/>
                           </Group>
-                          <Component id="useridtf" pref="144" max="32767" attributes="1"/>
+                          <Component id="userid_tf" pref="144" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -99,7 +99,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="logout_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="useridtf" min="-2" max="-2" attributes="0"/>
+                      <Component id="userid_tf" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
         <Property name="text" type="java.lang.String" value="password"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="useridtf">
+    <Component class="javax.swing.JTextField" name="userid_tf">
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordtf">
     </Component>

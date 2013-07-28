@@ -13,6 +13,8 @@ public class YearOnly extends javax.swing.JFrame {
     public YearOnly( SecondClass sc) {
         this.sc = sc;
         initComponents();
+        this.setTitle("Year"); 
+        admission_year_tf.requestFocus();
     }
 
     /**
@@ -122,7 +124,14 @@ public class YearOnly extends javax.swing.JFrame {
     }//GEN-LAST:event_back_buttonActionPerformed
 
 private void create_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_bottonActionPerformed
-    new CreateCertificate().create(sc, new AllRequiredClass(admission_year_tf.getText(), completion_year_tf.getText()));    
+    admission_year = Integer.parseInt(admission_year_tf.getText());
+    completion_year = Integer.parseInt(completion_year_tf.getText());
+    if(admission_year < completion_year){
+        new CreateCertificate().create(sc, new AllRequiredClass(admission_year, completion_year, Integer.parseInt((String)pursuing_semester.getSelectedItem())));    
+    }
+    else{
+        javax.swing.JOptionPane.showMessageDialog(null, "Admission year should be lesser than Completion year. ");
+    }
 }//GEN-LAST:event_create_bottonActionPerformed
 
     /**
@@ -172,5 +181,7 @@ private void create_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JComboBox pursuing_semester;
     // End of variables declaration//GEN-END:variables
     
-    private SecondClass sc;           
+    private SecondClass sc;     
+    private int admission_year;
+    private int completion_year;
 }

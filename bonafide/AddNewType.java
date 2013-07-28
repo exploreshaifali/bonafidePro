@@ -9,6 +9,8 @@ public class AddNewType extends javax.swing.JFrame {
 
     public AddNewType() {
         initComponents();
+        this.setTitle("Add New Type");
+        name_tf.requestFocus();
         groupButton();
     }
 
@@ -22,7 +24,7 @@ public class AddNewType extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        nametf = new javax.swing.JTextField();
+        name_tf = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         formateta = new javax.swing.JTextArea();
         addb = new javax.swing.JButton();
@@ -87,7 +89,7 @@ public class AddNewType extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
@@ -102,7 +104,7 @@ public class AddNewType extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -132,7 +134,7 @@ private void groupButton(){
    
 private boolean isInitialsCorrect(){
     //fetching values of new_type_name and new_type_formate
-    new_type_name = nametf.getText();
+    new_type_name = name_tf.getText();
     new_type_formate = formateta.getText();
     if(yesrb.isSelected())
         requirements = "y";
@@ -155,7 +157,7 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
         ps =con.prepareStatement("insert into type (typeName, formate, requirements) values(?,?,?)");
         ps.setString(1, new_type_name);
         ps.setString(2, new_type_formate);
-        if(Requirements.getCount() == 0){
+        if(AddNewTypeRequirements.getCount() == 0){
             ps.setString(3, "n");
         }
         else{
@@ -179,17 +181,17 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
     
     
     //adding requirrements to requirements table, if count > 0:
-    if(Requirements.getCount() > 0){
+    if(AddNewTypeRequirements.getCount() > 0){
       try{
           c = new Connect();
         con = c.getConnection();
         
         ps = con.prepareStatement("insert into requirements(typeName, cgpaSgpa, address, feeStructure, year) values(?,?,?,?,?)");
         ps.setString(1,  new_type_name);
-        ps.setString(2, Requirements.getCgpa_sgpa());
-        ps.setString(3, Requirements.getAddress());
-        ps.setString(4, Requirements.getFee_structure());
-        ps.setString(5, Requirements.getYear());
+        ps.setString(2, AddNewTypeRequirements.getCgpa_sgpa());
+        ps.setString(3, AddNewTypeRequirements.getAddress());
+        ps.setString(4, AddNewTypeRequirements.getFee_structure());
+        ps.setString(5, AddNewTypeRequirements.getYear());
         ps.executeUpdate();
    
           this.dispose();
@@ -215,7 +217,7 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
     if(isInitialsCorrect()){
         backb.setEnabled(false);
         norb.setEnabled(false); 
-        new Requirements().setVisible(true); 
+        new AddNewTypeRequirements().setVisible(true); 
     }
     else{
         javax.swing.JOptionPane.showMessageDialog(null, "Name and Formate can't be blank.");
@@ -266,7 +268,7 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nametf;
+    private javax.swing.JTextField name_tf;
     private javax.swing.JRadioButton norb;
     private javax.swing.JRadioButton yesrb;
     // End of variables declaration//GEN-END:variables

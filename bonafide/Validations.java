@@ -44,4 +44,19 @@ public class Validations {
         }
         return r;
     }
+    
+public boolean isVallidYear(String s){
+        boolean r = true;
+        for(int i = 0; i <s.length(); i++){
+            char c = s.charAt(i);
+            if(Character.isDigit(c) || (c == '.') || (c == '/')){
+                continue;
+            }
+            else{
+                r = false;
+                break;
+            }
+        }
+        return r;
+    }    
 }

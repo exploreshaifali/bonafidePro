@@ -24,55 +24,68 @@ public class CreateCertificate {
        }     
        c.closeConnection(con, ps, rs);
        System.out.println("Step 2 completed!!! of create class/mtd");
-   }catch(Exception e){ javax.swing.JOptionPane.showMessageDialog(null, "Problem in fetching formate"+e);}
+   }
+   catch(Exception e){
+       javax.swing.JOptionPane.showMessageDialog(null, "Problem in fetching formate"+e); 
+       //System.exit(1000);  not working!!
+   }
    finally{c.closeConnection(con, ps, rs); }
    
    //Step-3 Merging data with formate
    try{
+       c = new Connect();       
        to_deliver = c.splitJoin(formate, "{name}", sc.getName());
        to_deliver = c.splitJoin(to_deliver, "{roll}", sc.getRollnum());
        to_deliver = c.splitJoin(to_deliver, "{father}", sc.getFather_name());
-       to_deliver = c.splitJoin(to_deliver, "{course}", sc.getCourse());
+       to_deliver = c.splitJoin(to_deliver, "{course}",  c.getFullFormOfcourse(sc.getCourse()));
        to_deliver = c.splitJoin(to_deliver, "{sem}",Integer.toString(sc.getSemester())); 
        to_deliver = c.splitJoin(to_deliver, "{enrollment}", sc.getEnrollment());
+       to_deliver = c.splitJoin(to_deliver, "{yr}", c.getYearsofCourse(sc.getCourse(), "Problem in fetching period of course from database. "));
+       System.out.println("Inside step 3.");
        if(ob != null){
             System.out.println((ob.getClass()).getName());
             AllRequiredClass obj = (AllRequiredClass)ob; 
-            if(sc.getRequie_cgpa().equals("y")){ 
+            if(sc.getRequire_cgpa().equals("y")){ 
                 System.out.println("Kya bhai m in");               
                 to_deliver = c.splitJoin(to_deliver, "{cgpa}",Float.toString(obj.getCgpa()));
                 to_deliver = c.splitJoin(to_deliver, "{sgpa}", Float.toString(obj.getSgpa()));
                 to_deliver = c.splitJoin(to_deliver, "{in sem}", Integer.toString(obj.getIn_sem()));
                 to_deliver = c.splitJoin(to_deliver, "{pursuing sem}", Integer.toString(obj.getPursuing_sem()));              
             }
-            if(sc.getRequie_address().equals("y")) {
+            if(sc.getRequire_address().equals("y")) {
                 to_deliver = c.splitJoin(to_deliver, "{local address}", obj.getLocal_address());
                 to_deliver = c.splitJoin(to_deliver, "{permanent address}", obj.getPermanent_address()); 
             }
-            if(sc.getRequie_year().equals("y")){
-                 to_deliver = c.splitJoin(to_deliver, "{admission year}", obj.getAdmission_year());
-                 to_deliver = c.splitJoin(to_deliver, "{completion year}", obj.getCompletion_year());   
+            if(sc.getRequire_year().equals("y")){
+                 to_deliver = c.splitJoin(to_deliver, "{admission year}", Integer.toString(obj.getAdmission_year()));
+                 to_deliver = c.splitJoin(to_deliver, "{completion year}", Integer.toString(obj.getCompletion_year()));  
             }
+            /*
             else{                         
                 to_deliver = c.splitJoin(to_deliver, "{birth date}", obj.getBirth_date());
                 to_deliver = c.splitJoin(to_deliver, "{birth place}", obj.getBirth_place());   
             }
+             * 
+             */
+       c.closeConnection(con, ps, rs);      
        System.out.println("Step 3 completed of create mtd!!!");
        System.out.println(to_deliver);       
        }
    }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem while merging!"+e);}
+   finally{c.closeConnection(con, ps, rs); }
    
    //Step-4 Sending this above result op to toDeliver table:
-   try{
+   
+   try{     
        c = new Connect();
         con = c.getConnection();
-        ps =con.prepareStatement("insert into toDeliver (op) values( '"+to_deliver+"' )");        
+        ps =con.prepareStatement("insert into toDeliver (op) values( '"+to_deliver+"')");        
         ps.executeUpdate();
         c.closeConnection(con, ps, null);
-   }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in delivering data"+e);}
+   }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in delivering data!! "+e);}
    finally{c.closeConnection(con, ps, rs); }
         
-    // Step-4 Now code for jasper reports:    
+    // Step-5 Now code for jasper reports:    
        try{ 
         Connection conn =  DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
         net.sf.jasperreports.engine.design.JasperDesign jasperDesign = net.sf.jasperreports.engine.xml.JRXmlLoader.load("E:\\PD\\pd\\pratice\\Bonafide\\src\\bonafide\\report1.jrxml");

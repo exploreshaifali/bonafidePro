@@ -41,7 +41,7 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
-                                  <Component id="nametf" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
+                                  <Component id="name_tf" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -65,7 +65,7 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="nametf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="name_tf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -100,7 +100,7 @@
         <Property name="text" type="java.lang.String" value="Formate"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nametf">
+    <Component class="javax.swing.JTextField" name="name_tf">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

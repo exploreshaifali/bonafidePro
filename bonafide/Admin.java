@@ -11,6 +11,7 @@ public class Admin extends javax.swing.JFrame {
  
     public Admin() {
         initComponents();
+        this.setTitle("Admin");
         try{ 
             Class.forName("org.sqlite.JDBC");
             con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
@@ -32,8 +33,22 @@ public class Admin extends javax.swing.JFrame {
         delete_course_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         file_menu = new javax.swing.JMenu();
+        back_file_menu = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         edit_menu = new javax.swing.JMenu();
-        add_menu = new javax.swing.JMenu();
+        add_edit_menu = new javax.swing.JMenu();
+        course_add_menu = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        certificate_type_add_menu = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        user_add_menu = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        delete_menu = new javax.swing.JMenu();
+        course_delete_user = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        certificate_type_delete_menu = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        user_delete_menu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,13 +102,84 @@ public class Admin extends javax.swing.JFrame {
         });
 
         file_menu.setText("File");
+
+        back_file_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, 0));
+        back_file_menu.setText("Back");
+        back_file_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_file_menuActionPerformed(evt);
+            }
+        });
+        file_menu.add(back_file_menu);
+        file_menu.add(jSeparator2);
+
         menubar.add(file_menu);
 
         edit_menu.setText("Edit");
-        menubar.add(edit_menu);
 
-        add_menu.setText("Add");
-        menubar.add(add_menu);
+        add_edit_menu.setText("Add");
+
+        course_add_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        course_add_menu.setText("Course");
+        course_add_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                course_add_menuActionPerformed(evt);
+            }
+        });
+        add_edit_menu.add(course_add_menu);
+        add_edit_menu.add(jSeparator1);
+
+        certificate_type_add_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        certificate_type_add_menu.setText("Certificate Type");
+        certificate_type_add_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                certificate_type_add_menuActionPerformed(evt);
+            }
+        });
+        add_edit_menu.add(certificate_type_add_menu);
+        add_edit_menu.add(jSeparator3);
+
+        user_add_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        user_add_menu.setText("User");
+        user_add_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_add_menuActionPerformed(evt);
+            }
+        });
+        add_edit_menu.add(user_add_menu);
+
+        edit_menu.add(add_edit_menu);
+        edit_menu.add(jSeparator4);
+
+        delete_menu.setText("Delete");
+
+        course_delete_user.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        course_delete_user.setText("Course");
+        delete_menu.add(course_delete_user);
+        delete_menu.add(jSeparator5);
+
+        certificate_type_delete_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        certificate_type_delete_menu.setText("Certificate Type");
+        certificate_type_delete_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                certificate_type_delete_menuActionPerformed(evt);
+            }
+        });
+        delete_menu.add(certificate_type_delete_menu);
+        delete_menu.add(jSeparator6);
+
+        user_delete_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        user_delete_menu.setText("User");
+        user_delete_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_delete_menuActionPerformed(evt);
+            }
+        });
+        delete_menu.add(user_delete_menu);
+
+        edit_menu.add(delete_menu);
+
+        menubar.add(edit_menu);
 
         setJMenuBar(menubar);
 
@@ -183,6 +269,35 @@ private void delete_course_buttonActionPerformed(java.awt.event.ActionEvent evt)
     this.dispose();
 }//GEN-LAST:event_delete_course_buttonActionPerformed
 
+private void back_file_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_file_menuActionPerformed
+    backbActionPerformed(evt);
+}//GEN-LAST:event_back_file_menuActionPerformed
+
+private void course_add_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_add_menuActionPerformed
+    new AddNewCourse().setVisible(true);
+    this.dispose();
+}//GEN-LAST:event_course_add_menuActionPerformed
+
+private void certificate_type_add_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certificate_type_add_menuActionPerformed
+    new AddNewType().setVisible(true);
+    this.dispose();
+}//GEN-LAST:event_certificate_type_add_menuActionPerformed
+
+private void user_add_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_add_menuActionPerformed
+    new AddNewUser().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_user_add_menuActionPerformed
+
+private void certificate_type_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certificate_type_delete_menuActionPerformed
+    new DeleteType().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_certificate_type_delete_menuActionPerformed
+
+private void user_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_delete_menuActionPerformed
+    new DeleteUser().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_user_delete_menuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,16 +335,30 @@ private void delete_course_buttonActionPerformed(java.awt.event.ActionEvent evt)
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_course_button;
-    private javax.swing.JMenu add_menu;
+    private javax.swing.JMenu add_edit_menu;
     private javax.swing.JButton add_new_userb;
+    private javax.swing.JMenuItem back_file_menu;
     private javax.swing.JButton backb;
+    private javax.swing.JMenuItem certificate_type_add_menu;
+    private javax.swing.JMenuItem certificate_type_delete_menu;
+    private javax.swing.JMenuItem course_add_menu;
+    private javax.swing.JMenuItem course_delete_user;
     private javax.swing.JButton delete_course_button;
+    private javax.swing.JMenu delete_menu;
     private javax.swing.JButton delete_typeb;
     private javax.swing.JButton delete_user_button;
     private javax.swing.JMenu edit_menu;
     private javax.swing.JMenu file_menu;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JMenuBar menubar;
     private javax.swing.JButton new_typeb;
+    private javax.swing.JMenuItem user_add_menu;
+    private javax.swing.JMenuItem user_delete_menu;
     // End of variables declaration//GEN-END:variables
     private java.sql.Connection con;
     private java.sql.PreparedStatement ps;

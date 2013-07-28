@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package bonafide;
-import java.util.*;
 
 /**
  *
@@ -14,7 +13,7 @@ public class AllRequiredClass{
     public AllRequiredClass() {
     }
 
-    public AllRequiredClass(String admission_year, String completion_year, float cgpa, float sgpa, int in_sem, int pursuing_sem, String local_address, String permanent_address, String birth_date, String birth_place) {
+    public AllRequiredClass(int admission_year, int completion_year, float cgpa, float sgpa, int in_sem, int pursuing_sem, String local_address, String permanent_address, String birth_date, String birth_place) {
         this.admission_year = admission_year;
         this.completion_year = completion_year;
         this.cgpa = cgpa;
@@ -39,7 +38,7 @@ public class AllRequiredClass{
         this.permanent_address = permanent_address;
     }
 
-    public AllRequiredClass(String admission_year, String completion_year, int pursuing_sem) {
+    public AllRequiredClass(int admission_year, int completion_year, int pursuing_sem) {
         this.admission_year = admission_year;
         this.completion_year = completion_year;
         this.pursuing_sem = pursuing_sem;
@@ -49,7 +48,7 @@ public class AllRequiredClass{
     
     //getter methods
 
-    public String getAdmission_year() {
+    public int getAdmission_year() {
         return admission_year;
     }
 
@@ -65,7 +64,7 @@ public class AllRequiredClass{
         return cgpa;
     }
 
-    public String getCompletion_year() {
+    public int getCompletion_year() {
         return completion_year;
     }
 
@@ -93,8 +92,8 @@ public class AllRequiredClass{
     
     
     //Variable declarations.
-    private String admission_year;
-    private String completion_year;
+    private int admission_year;
+    private int completion_year;
     private float cgpa;
     private float sgpa;
     private int in_sem;
