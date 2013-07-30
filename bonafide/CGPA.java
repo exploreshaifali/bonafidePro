@@ -165,7 +165,7 @@ public class CGPA extends javax.swing.JFrame {
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
-      Second f1 = new Second();
+      Second f1 = new Second(sc);
       f1.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_back_buttonActionPerformed
@@ -187,8 +187,14 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         javax.swing.JOptionPane.showMessageDialog(null, "pursuing semester can be only the next of previous one.");
     }
     else{
-    AllRequiredClass rc = new AllRequiredClass(cgpa, sgpa, Integer.parseInt(in_sem_combo.getSelectedItem().toString()), Integer.parseInt(pursuing_sem_combo.getSelectedItem().toString()));
-    new CreateCertificate().create(sc, rc); 
+    AllRequiredClass arc = new AllRequiredClass(cgpa, sgpa, Integer.parseInt(in_sem_combo.getSelectedItem().toString()), Integer.parseInt(pursuing_sem_combo.getSelectedItem().toString()));
+    if(!sc.getOther_requirement1().equals("n")){
+        new OtherRequirements(sc, arc).setVisible(true);
+        this.dispose();
+    }
+ else{
+    new CreateCertificate().create(sc, arc);
+    }    
     }
 }//GEN-LAST:event_create_buttonActionPerformed
 

@@ -22,6 +22,9 @@ public class AddNewType extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         name_tf = new javax.swing.JTextField();
@@ -32,6 +35,12 @@ public class AddNewType extends javax.swing.JFrame {
         yesrb = new javax.swing.JRadioButton();
         norb = new javax.swing.JRadioButton();
         backb = new javax.swing.JButton();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +65,11 @@ public class AddNewType extends javax.swing.JFrame {
         yesrb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requirementYes(evt);
+            }
+        });
+        yesrb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yesrbActionPerformed(evt);
             }
         });
 
@@ -136,11 +150,12 @@ private boolean isInitialsCorrect(){
     //fetching values of new_type_name and new_type_formate
     new_type_name = name_tf.getText();
     new_type_formate = formateta.getText();
-    if(yesrb.isSelected())
-        requirements = "y";
-    else
+    if(yesrb.isSelected()){
+        requirements = "y";  
+    }
+    else{        
         requirements = "n";
-    
+    }
     //Checking name or formate fields are not blank.
     if(new_type_name == null || new_type_formate == null || new_type_name.equals("") || new_type_formate.equals("") )
         return false;
@@ -150,61 +165,68 @@ private boolean isInitialsCorrect(){
 private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbActionPerformed
     if(isInitialsCorrect()){
     // Inserting Type and formate in type table..
-    try{
+    try{        
         c = new Connect();
-        con = c.getConnection();
-        
+        con = c.getConnection();        
         ps =con.prepareStatement("insert into type (typeName, formate, requirements) values(?,?,?)");
-        ps.setString(1, new_type_name);
-        ps.setString(2, new_type_formate);
-        if(AddNewTypeRequirements.getCount() == 0){
+        ps.setString(1, new_type_name);        
+        ps.setString(2, new_type_formate+"  ");     
+        System.out.println(requirements+"rrrrrrrrrrr");
+        if(requirements.equals("y")){
+            if(rc.getCount() == 0){
+                requirements = "n";
+            }
+        }
+        ps.setString(3, requirements);
+        /*
+        if(requirements.equals("n")){
             ps.setString(3, "n");
         }
         else{
+            if(rc.getCount() == 0){
             ps.setString(3, "y");
-        }
-        ps.executeUpdate();
-                    
-        javax.swing.JOptionPane.showMessageDialog(null, new_type_name+" is added!");
-        Admin f = new Admin();
-        f.setVisible(true);
- 
-        this.dispose();
-         }
-       catch(Exception e){
-             javax.swing.JOptionPane.showMessageDialog(null, "problem in adding name and formate."+e);             
-         }
-    finally{
-        c.closeConnection(con, ps, null); 
-    }
-    
-    
-    
-    //adding requirrements to requirements table, if count > 0:
-    if(AddNewTypeRequirements.getCount() > 0){
+            }
+        } 
+         * 
+         */
+        ps.executeUpdate();        
+        c.closeConnection(con, ps, null);                   
+        //adding requirrements to requirements table, if count > 0:
+    if(requirements.equals("y")){
+        if(rc != null){
+          if(rc.getCount() > 0){
       try{
           c = new Connect();
         con = c.getConnection();
         
-        ps = con.prepareStatement("insert into requirements(typeName, cgpaSgpa, address, feeStructure, year) values(?,?,?,?,?)");
+        ps = con.prepareStatement("insert into requirements(typeName, cgpaSgpa, address, feeStructure, year, other_requirement1, other_requirement2, other_requirement3) values(?,?,?,?,?,?,?,?)");
         ps.setString(1,  new_type_name);
-        ps.setString(2, AddNewTypeRequirements.getCgpa_sgpa());
-        ps.setString(3, AddNewTypeRequirements.getAddress());
-        ps.setString(4, AddNewTypeRequirements.getFee_structure());
-        ps.setString(5, AddNewTypeRequirements.getYear());
-        ps.executeUpdate();
-   
-          this.dispose();
-      }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in adding requirements."+e);}
-      finally{
-          c.closeConnection(con, ps, null); 
-      } 
+        ps.setString(2, rc.getCgpa_sgpa());
+        ps.setString(3, rc.getAddress());
+        ps.setString(4, rc.getFee_structure());
+        ps.setString(5, rc.getYear());
+        ps.setString(6, rc.getOther_requirement1()); 
+        ps.setString(7, rc.getOther_requirement2());
+        ps.setString(8, rc.getOther_requirement3());
+        //System.out.println(rc.getOther_requirement1());
+        ps.executeUpdate();           
+      }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem while adding requirements."+e);}
+      finally{ c.closeConnection(con, ps, null); }          
+      }
     }
+    }        
     
+    javax.swing.JOptionPane.showMessageDialog(null, new_type_name+" is added!");    
     }
-    else
-        javax.swing.JOptionPane.showMessageDialog(null, "Name and Formate can't be blank.");
-    
+      catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "problem in adding name and formate."+e); }
+    finally{ c.closeConnection(con, ps, null);  }    
+    Admin f = new Admin();
+    f.setVisible(true); 
+    this.dispose();
+    }
+    else{
+        javax.swing.JOptionPane.showMessageDialog(null, "Name and Formate can't be blank.");    
+    }
 }//GEN-LAST:event_addbActionPerformed
 
 private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbActionPerformed
@@ -217,13 +239,18 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
     if(isInitialsCorrect()){
         backb.setEnabled(false);
         norb.setEnabled(false); 
-        new AddNewTypeRequirements().setVisible(true); 
+        rc = new AddNewTypeRequirementsClass();
+        new AddNewTypeRequirements(rc).setVisible(true); 
     }
     else{
         javax.swing.JOptionPane.showMessageDialog(null, "Name and Formate can't be blank.");
     }
        
 }//GEN-LAST:event_requirementYes
+
+private void yesrbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesrbActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_yesrbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +294,9 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField name_tf;
     private javax.swing.JRadioButton norb;
@@ -282,5 +312,6 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
     
     private String new_type_name;
     private String new_type_formate;
-    private String requirements;
+    private String requirements = "n";
+    AddNewTypeRequirementsClass rc;
 }

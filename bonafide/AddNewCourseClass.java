@@ -65,23 +65,33 @@ public class AddNewCourseClass {
         }
     }
     //putting new course and its details in database
-    public void putDataIntoDatabase(){
+    public void putToDatabase(String qr, String added_message, String error){
         try{
         c = new Connect();
         con = c.getConnection();
-        ps = con.prepareStatement("insert into course values('"+course_name+"', '"+fullform+"', '"+years+"' , "+sem+")");
+        ps = con.prepareStatement(qr);
         ps.executeUpdate();
         c.closeConnection(con, ps, rs);
-        javax.swing.JOptionPane.showMessageDialog(null, "Course "+course_name+" is added!!");
+        if(added_message != null){
+            javax.swing.JOptionPane.showMessageDialog(null, added_message);
         }
-        catch(Exception ex){javax.swing.JOptionPane.showMessageDialog(null, "Problem in putting data into database data "+ex);}
+        }
+        catch(Exception ex){javax.swing.JOptionPane.showMessageDialog(null, error+ex);}
        finally{ c.closeConnection(con, ps, rs);}        
     }
+    
+    public void addPItoDatabase(){}
+    
     //variables
     private String course_name;
     private String fullform;
     private String years;
     private int sem;
+    private String pi1_name;
+    private int till_sem1;
+    private String pi2_name;
+    private int til2_sem1;
+    
     
    private Connection con;
    private PreparedStatement ps;

@@ -137,7 +137,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="nametf" alignment="1" pref="177" max="32767" attributes="1"/>
-                                          <Component id="FnameText" alignment="0" pref="177" max="32767" attributes="1"/>
+                                          <Component id="father_nametf" alignment="0" pref="177" max="32767" attributes="1"/>
                                           <Component id="rollnumtf" alignment="1" pref="177" max="32767" attributes="1"/>
                                           <Component id="enrollment_tf" alignment="0" pref="177" max="32767" attributes="1"/>
                                       </Group>
@@ -202,7 +202,7 @@
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="nametf" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="FnameText" min="-2" max="-2" attributes="0"/>
+                      <Component id="father_nametf" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="enrollment_tf" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -316,9 +316,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nametfActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="FnameText">
+    <Component class="javax.swing.JTextField" name="father_nametf">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FnameTextActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="father_nametfActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="more_information_button">

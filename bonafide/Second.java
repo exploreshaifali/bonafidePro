@@ -12,6 +12,20 @@ public class Second extends javax.swing.JFrame {
         fettingFromDB();
         //ctype_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student bonafide", "Character Certificate", "Medium", "CGPA/SGPA", "Fee Structure", "Passport", "Visa" }));
     }
+    
+    public Second(SecondClass sc) {
+        initComponents();        
+        fettingFromDB();
+        //ctype_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student bonafide", "Character Certificate", "Medium", "CGPA/SGPA", "Fee Structure", "Passport", "Visa" }));
+        ctype_combo.setSelectedItem(sc.getCert_type());
+        course_combo.setSelectedItem(sc.getCourse()); 
+        sem_combo.setSelectedItem(sc.getSemester()); 
+        rollnumtf.setText(sc.getRollnum()); 
+        nametf.setText(sc.getName()); 
+        father_nametf.setText(sc.getFather_name()); 
+        enrollment_tf.setText(sc.getEnrollment()); 
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,7 +51,7 @@ public class Second extends javax.swing.JFrame {
         sem_combo = new javax.swing.JComboBox();
         rollnumtf = new javax.swing.JTextField();
         nametf = new javax.swing.JTextField();
-        FnameText = new javax.swing.JTextField();
+        father_nametf = new javax.swing.JTextField();
         more_information_button = new javax.swing.JButton();
         change_password_button = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -109,9 +123,9 @@ public class Second extends javax.swing.JFrame {
             }
         });
 
-        FnameText.addActionListener(new java.awt.event.ActionListener() {
+        father_nametf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FnameTextActionPerformed(evt);
+                father_nametfActionPerformed(evt);
             }
         });
 
@@ -194,7 +208,7 @@ public class Second extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(nametf, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                            .addComponent(FnameText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                            .addComponent(father_nametf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                                             .addComponent(rollnumtf, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                                             .addComponent(enrollment_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -241,7 +255,7 @@ public class Second extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(FnameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(father_nametf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(enrollment_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -269,32 +283,42 @@ public class Second extends javax.swing.JFrame {
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     private void SaveCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCActionPerformed
+        int flage = 1;
+        String error = "";
         //fetching data what user entered.
-       name = nametf.getText(); 
-       rollnum = rollnumtf.getText();
+       String name = nametf.getText(); 
+       String rollnum = rollnumtf.getText();
+       String father_name = father_nametf.getText();
        //Providing validations
        Validations v = new Validations(); 
        //checking that roll number or name is not empty.
-       if(v.isEmpty(name) || v.isEmpty(rollnum)){ 
-           JOptionPane.showMessageDialog(null, "Roll Number or Name can't be empty!");
+       if(v.isEmpty(name, rollnum)){                      
+           JOptionPane.showMessageDialog(null, "Roll Number and Name can't be empty!");
        }
-       else{ 
-           //Checking wether name contains number of not
-           if(v.contaionsDigit(name)){
-               JOptionPane.showMessageDialog(null, "Name can have only letters and not numbers.");
+       else{
+           //Checking for vallid rollnumber
+           if(!v.isVallidRollnumber(rollnum)){
+               error += "Rollnumber is not vallid(must be of atleast 9 length and can have only 0-9A-Za-z-)!";
            }
-           else{
-           //Creating an object of Class SecondClass and setting its fields
-           SecondClass sc = new SecondClass(nametf.getText(), rollnumtf.getText().toUpperCase(), course_combo.getSelectedItem().toString(), ctype_combo.getSelectedItem().toString(),enrollment_tf.getText().toUpperCase(),FnameText.getText(), Integer.parseInt(sem_combo.getSelectedItem().toString()));
-           if(sc.isFatherNamevallid()){
-           sc.putDataIntoDatabase();
-           sc.identifyTypeAndMove(sc);
-           this.dispose();
-           }
-           else{
-           JOptionPane.showMessageDialog(null, "Father's name can have only letters and not numbers.");
-           } 
-           }
+           //Checking for vallid names
+        if(!v.isVallidName(name)){
+           flage = 0;
+           error += "Name can contain only A-Za-z.- and total length must be more than 6\n";
+        }
+        if(!v.isVallidName(father_name)){
+            flage = 0;
+           error += "father name can contain only A-Za-z.- and total length must be more than 6\n";
+        }
+        if(flage == 0){
+            JOptionPane.showMessageDialog(null, error);
+        }        
+        else{            
+            //Creating an object of Class SecondClass and setting its fields
+           SecondClass sc = new SecondClass(name, rollnum.toUpperCase(), course_combo.getSelectedItem().toString(), ctype_combo.getSelectedItem().toString(),enrollment_tf.getText().toUpperCase(),father_name, Integer.parseInt(sem_combo.getSelectedItem().toString()));          
+           sc.putDataIntoDatabase();           
+           sc.identifyTypeAndMove(sc);           
+           this.dispose();       
+       }         
        }                   
     }//GEN-LAST:event_SaveCActionPerformed
     
@@ -369,9 +393,9 @@ private void nametfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 // TODO add your handling code here:
 }//GEN-LAST:event_nametfActionPerformed
 
-private void FnameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FnameTextActionPerformed
+private void father_nametfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_father_nametfActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_FnameTextActionPerformed
+}//GEN-LAST:event_father_nametfActionPerformed
 
 private void enrollment_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollment_tfActionPerformed
 // TODO add your handling code here:
@@ -423,7 +447,6 @@ private void fettingFromDB(){
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Display;
-    private javax.swing.JTextField FnameText;
     private javax.swing.JButton SaveC;
     private javax.swing.JMenuItem back_file_menu;
     private javax.swing.JButton change_password_button;
@@ -431,6 +454,7 @@ private void fettingFromDB(){
     private javax.swing.JComboBox ctype_combo;
     private javax.swing.JMenu edit_menu;
     private javax.swing.JTextField enrollment_tf;
+    private javax.swing.JTextField father_nametf;
     private javax.swing.JMenu file_menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -454,10 +478,6 @@ private void fettingFromDB(){
     private javax.swing.JTextField rollnumtf;
     private javax.swing.JComboBox sem_combo;
     // End of variables declaration//GEN-END:variables
-    
-    private String name;
-    private String rollnum;    
-   
    private java.sql.Connection con;
    private PreparedStatement ps;
    private ResultSet rs;

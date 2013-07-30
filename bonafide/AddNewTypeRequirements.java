@@ -22,27 +22,45 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
         this.setTitle("Requirements"); 
         count = 0;
     }
+    public AddNewTypeRequirements(AddNewTypeRequirementsClass rc) {
+        initComponents();
+        this.setTitle("Requirements"); 
+        count = 0;
+        this.rc = rc;
+    }
 
-    public static String getAddress() {
+    //Getter methods
+
+    public String getAddress() {
         return address;
     }
 
-    public static String getCgpa_sgpa() {
+    public String getCgpa_sgpa() {
         return cgpa_sgpa;
     }
 
-    public static String getFee_structure() {
-        return fee_structure;
-    }
-
-    public static String getYear() {
-        return year;
-    }
-
-    public static int getCount() {
+    public int getCount() {
         return count;
     }
 
+    public String getFee_structure() {
+        return fee_structure;
+    }
+
+    public String getOther_requirement1() {
+        return other_requirement1;
+    }
+
+    public String getOther_requirement2() {
+        return other_requirement2;
+    }
+
+    public String getOther_requirement3() {
+        return other_requirement3;
+    }
+    
+    
+    
     
     
     
@@ -63,6 +81,14 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
         year_cb = new javax.swing.JCheckBox();
         fee_structure_cb = new javax.swing.JCheckBox();
         back_button = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        other_requirement1_tf = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        other_requirement2_tf = new javax.swing.JTextField();
+        other_requirement3_tf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +124,7 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
                         .addComponent(fee_structure_cb)
                         .addGap(58, 58, 58)
                         .addComponent(year_cb)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         panel_contain_cbsLayout.setVerticalGroup(
             panel_contain_cbsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +137,7 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
                 .addGroup(panel_contain_cbsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fee_structure_cb)
                     .addComponent(year_cb))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         back_button.setText("Back");
@@ -121,22 +147,55 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Require anything else:");
+
+        jLabel3.setText("What to be changed in formate:");
+
+        jLabel4.setText("First Requirement ");
+
+        jLabel5.setText("Second Requirement");
+
+        jLabel6.setText("Third Requirement");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_contain_cbs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
-                .addComponent(back_button)
-                .addGap(51, 51, 51)
-                .addComponent(add_button)
-                .addGap(239, 239, 239))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_contain_cbs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(back_button)))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(add_button)
+                                .addGap(187, 187, 187))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(other_requirement2_tf, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(other_requirement1_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(other_requirement3_tf, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(129, 129, 129)))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +204,29 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(panel_contain_cbs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(other_requirement1_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(other_requirement2_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(other_requirement3_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_button)
                     .addComponent(back_button))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,7 +259,29 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
     else 
         year = "n";
-    
+    other_requirement1 =other_requirement1_tf.getText();    
+    if(other_requirement1.length() != 0){
+        count++;
+        //System.out.println(other_requirement1+" inside antr");
+    }
+    else{
+        other_requirement1 = "n";        
+    }
+    other_requirement2 =other_requirement2_tf.getText();
+    if(other_requirement2.length() != 0){
+        count++;      
+    }
+    else{
+        other_requirement2 = "n";
+    }
+    other_requirement3 =other_requirement3_tf.getText();
+    if(other_requirement3.length() != 0){
+        count++;
+    }
+    else{
+        other_requirement3 = "n";
+        //System.out.println(other_requirement3+" is this???");
+    }
     
     //to know total how many requirements
         if(count == 0){
@@ -191,11 +290,19 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 this.dispose();
              }
              else{
-                 new AddNewTypeRequirements().setVisible(true);
+                 new AddNewTypeRequirements(new AddNewTypeRequirementsClass()).setVisible(true);
              }
         }
         else
             javax.swing.JOptionPane.showMessageDialog(null, "require only "+count+" items");
+            rc.setCgpa_sgpa(cgpa_sgpa); 
+            rc.setAddress(address); 
+            rc.setCount(count); 
+            rc.setFee_structure(fee_structure); 
+            rc.setOther_requirement1(other_requirement1); 
+            rc.setYear(year); 
+            rc.setOther_requirement2(other_requirement2); 
+            rc.setOther_requirement3(other_requirement3); 
     this.dispose();
 }//GEN-LAST:event_add_buttonActionPerformed
 
@@ -246,14 +353,26 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JCheckBox cgpa_sgpa_cb;
     private javax.swing.JCheckBox fee_structure_cb;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField other_requirement1_tf;
+    private javax.swing.JTextField other_requirement2_tf;
+    private javax.swing.JTextField other_requirement3_tf;
     private javax.swing.JPanel panel_contain_cbs;
     private javax.swing.JCheckBox year_cb;
     // End of variables declaration//GEN-END:variables
-    private static String cgpa_sgpa;
-    private static String address;
-    private static String fee_structure;
-    private static String year;
-    private static int count = 0;
+    private String cgpa_sgpa;
+    private String address;
+    private String fee_structure;
+    private String year;
+    private String other_requirement1;
+    private String other_requirement2;
+    private String other_requirement3;
+    private int count = 0;
+    AddNewTypeRequirementsClass rc;
     
     java.sql.Connection con;
     java.sql.PreparedStatement ps;

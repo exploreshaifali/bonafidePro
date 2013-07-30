@@ -11,13 +11,7 @@ public class Admin extends javax.swing.JFrame {
  
     public Admin() {
         initComponents();
-        this.setTitle("Admin");
-        try{ 
-            Class.forName("org.sqlite.JDBC");
-            con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
-            } catch(Exception e){
-          javax.swing.JOptionPane.showMessageDialog(null, e);          
-        }
+        this.setTitle("Admin");        
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +25,8 @@ public class Admin extends javax.swing.JFrame {
         delete_user_button = new javax.swing.JButton();
         add_course_button = new javax.swing.JButton();
         delete_course_button = new javax.swing.JButton();
+        update_pi = new javax.swing.JButton();
+        update_type_format_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         file_menu = new javax.swing.JMenu();
         back_file_menu = new javax.swing.JMenuItem();
@@ -98,6 +94,20 @@ public class Admin extends javax.swing.JFrame {
         delete_course_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete_course_buttonActionPerformed(evt);
+            }
+        });
+
+        update_pi.setText("Update PI");
+        update_pi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_piActionPerformed(evt);
+            }
+        });
+
+        update_type_format_button.setText("Update Type Format");
+        update_type_format_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_type_format_buttonActionPerformed(evt);
             }
         });
 
@@ -190,22 +200,24 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(delete_user_button)
-                            .addComponent(delete_typeb)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(add_new_userb)
-                                    .addComponent(new_typeb))
-                                .addGap(66, 66, 66)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(delete_course_button)
-                                    .addComponent(add_course_button)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(backb)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addComponent(backb))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(add_new_userb)
+                            .addComponent(new_typeb)
+                            .addComponent(add_course_button))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(update_pi)
+                            .addComponent(update_type_format_button))
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(delete_typeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(delete_course_button)
+                            .addComponent(delete_user_button, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,22 +225,26 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_new_userb)
-                    .addComponent(add_course_button))
+                    .addComponent(delete_user_button))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(new_typeb)
-                        .addGap(27, 27, 27)
-                        .addComponent(delete_typeb)
-                        .addGap(29, 29, 29)
-                        .addComponent(delete_user_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(add_course_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                         .addComponent(backb)
                         .addGap(48, 48, 48))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(delete_course_button)
-                        .addContainerGap())))
+                        .addComponent(delete_typeb)
+                        .addGap(11, 11, 11)
+                        .addComponent(delete_course_button))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(update_type_format_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(update_pi)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,6 +314,16 @@ private void user_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//
     this.dispose();
 }//GEN-LAST:event_user_delete_menuActionPerformed
 
+private void update_piActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_piActionPerformed
+    new bonafide.update.PI().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_update_piActionPerformed
+
+private void update_type_format_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_type_format_buttonActionPerformed
+    new bonafide.update.TypeFormate().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_update_type_format_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +383,8 @@ private void user_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JMenuBar menubar;
     private javax.swing.JButton new_typeb;
+    private javax.swing.JButton update_pi;
+    private javax.swing.JButton update_type_format_button;
     private javax.swing.JMenuItem user_add_menu;
     private javax.swing.JMenuItem user_delete_menu;
     // End of variables declaration//GEN-END:variables

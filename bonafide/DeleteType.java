@@ -10,6 +10,7 @@
  */
 package bonafide;
 
+
 /**
  *
  * @author ishant0
@@ -97,6 +98,7 @@ public class DeleteType extends javax.swing.JFrame {
 
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
     new Admin().setVisible(true); 
+    this.dispose();
 }//GEN-LAST:event_back_buttonActionPerformed
 
 private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
@@ -126,9 +128,8 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 Class.forName("org.sqlite.JDBC");
                 //code to enable foreign key constratints on sqlite3:
                 org.sqlite.SQLiteConfig config = new org.sqlite.SQLiteConfig();  
-                config.enforceForeignKeys(true);  
-                con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db", config.toProperties());
-                
+                config.enforceForeignKeys(true);                  
+                con = java.sql.DriverManager.getConnection("jdbc:sqlite:./src/bonafide/bonafide.db", config.toProperties());
             //con.execute("PRAGMA foreign_keys = ON");
             ps = con.prepareStatement("delete from type where typeName = '"+s+"'");
             ps.executeUpdate();

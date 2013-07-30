@@ -12,6 +12,10 @@ public class AllRequiredClass{
 
     public AllRequiredClass() {
     }
+    
+    public AllRequiredClass(String by_replace1) {        
+        this.by_replace1 = by_replace1;
+    }
 
     public AllRequiredClass(int admission_year, int completion_year, float cgpa, float sgpa, int in_sem, int pursuing_sem, String local_address, String permanent_address, String birth_date, String birth_place) {
         this.admission_year = admission_year;
@@ -88,9 +92,26 @@ public class AllRequiredClass{
     public float getSgpa() {
         return sgpa;
     }
+
+    public String getOther_reqiurement1() {
+        return other_reqiurement1;
+    }
+
+    public String getTo_replace1() {
+        return to_replace1;
+    }
+
+    public String getBy_replace() {
+        return by_replace1;
+    }
+ //Setter methods
+    public void setBy_replace1(String by_replace1) {
+        this.by_replace1 = by_replace1;
+    }
+
     
     
-    
+        
     //Variable declarations.
     private int admission_year;
     private int completion_year;
@@ -102,4 +123,7 @@ public class AllRequiredClass{
     private String permanent_address;
     private String birth_date;
     private String birth_place;   
+    private String other_reqiurement1;
+    private String to_replace1;
+    private String by_replace1;
 }

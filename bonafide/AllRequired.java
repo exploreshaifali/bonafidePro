@@ -213,7 +213,7 @@ public class AllRequired extends javax.swing.JFrame {
     
     //To move back NOT completed YET......
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
-    new Second().setVisible(true);
+    new Second(sc).setVisible(true);
     this.dispose();
 }//GEN-LAST:event_back_buttonActionPerformed
 

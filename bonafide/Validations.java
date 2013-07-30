@@ -20,14 +20,14 @@ public class Validations {
         return s.matches("[0-9]+");
     }
     
-    public boolean isEmpty(Object ob){
+    public boolean isEmpty(Object... ob){
     //checking given object is not empty.
-       if((ob.equals("")) || (ob == null)){
+        for(Object o : ob){
+       if((o.equals("")) || (o == null)){
            return true;
        }
-       else{
+        }
            return false;
-       }
     }
     
     public boolean isFloat(String s){
@@ -58,5 +58,35 @@ public boolean isVallidYear(String s){
             }
         }
         return r;
-    }    
+    }   
+
+public boolean isVallidName(String s){
+    if(s.length() < 6 || s.length() > 40){
+        System.out.println("lenght problem");
+        return false;
+    }
+    return s.matches("^[A-Za-z\\s.-]+");
+}
+
+public boolean isVallidRollnumber(String s){
+    if(s.length() < 9 || s.length() > 15){
+        return false;
+    }
+    //atleast one character
+    if(s.matches(".*^[A-Za-z]+.*")){
+        System.out.println("not a single character!!");
+        return false;
+    }
+    //atleast one number
+    if(!s.matches(".*\\d.*")){
+        System.out.println("not a single digit!");
+        return false;
+    }
+    if(s.matches("(.)\\1,2{3,}(\\b)")){
+        return false;
+    }
+    return s.matches("^[A-Za-z0-9-/]+");
+}
+
+
 }

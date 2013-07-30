@@ -14,7 +14,7 @@ public class YearOnly extends javax.swing.JFrame {
         this.sc = sc;
         initComponents();
         this.setTitle("Year"); 
-        admission_year_tf.requestFocus();
+        admission_year_tf.requestFocus();       
     }
 
     /**
@@ -118,7 +118,7 @@ public class YearOnly extends javax.swing.JFrame {
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
-        Second f1 = new Second();
+      Second f1 = new Second(sc);
       f1.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_back_buttonActionPerformed
@@ -127,7 +127,14 @@ private void create_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     admission_year = Integer.parseInt(admission_year_tf.getText());
     completion_year = Integer.parseInt(completion_year_tf.getText());
     if(admission_year < completion_year){
-        new CreateCertificate().create(sc, new AllRequiredClass(admission_year, completion_year, Integer.parseInt((String)pursuing_semester.getSelectedItem())));    
+        AllRequiredClass arc = new AllRequiredClass(admission_year, completion_year, Integer.parseInt((String)pursuing_semester.getSelectedItem()));
+        if(!sc.getOther_requirement1().equals("n")){
+        new OtherRequirements(sc, arc).setVisible(true);
+        this.dispose();
+    }
+ else{
+    new CreateCertificate().create(sc, arc);
+    }    
     }
     else{
         javax.swing.JOptionPane.showMessageDialog(null, "Admission year should be lesser than Completion year. ");

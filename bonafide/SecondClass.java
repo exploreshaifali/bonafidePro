@@ -68,7 +68,12 @@ public class SecondClass {
 
     public String getRequire_year() {
         return require_year;
-    }    
+    }
+
+    public String getOther_requirement1() {
+        return other_requirement1;
+    }
+    
     //setter methods
     public void setCert_type(String cert_type) {
         this.cert_type = cert_type;
@@ -97,14 +102,7 @@ public class SecondClass {
     public void setSemester(int semester) {
         this.semester = semester;
     }
-    //Validations
-    Validations v = new Validations();
-    public boolean isFatherNamevallid(){
-        if(v.contaionsDigit(father_name)){
-            return false;
-        }
-        return true;
-    }
+    
     //putting data into datbase.
     public void putDataIntoDatabase(){
     try{
@@ -129,7 +127,7 @@ public class SecondClass {
        finally{ c.closeConnection(con, ps, rs);}        
     }
     
-    public void identifyTypeAndMove( SecondClass sc){
+  public void identifyTypeAndMove( SecondClass sc){
     //Identifing the type and moving to concerned type of certificate.
        //Step-1 knowing that the ctype have requirements or not.
        try{
@@ -147,18 +145,26 @@ public class SecondClass {
            else{
                //Step-2closing connection with type and connecting with requirements table.                          
                c.closeConnection(null, ps, rs);
-               ps = con.prepareStatement("select * from requirements where typeName = '"+cert_type+"'");
-               rs = ps.executeQuery();
+               System.out.println("Working till here");
+               ps = con.prepareStatement("select * from requirements where typeName = '"+cert_type+"'");               
+               rs = ps.executeQuery();               
                require_cgpa = rs.getString("cgpaSgpa");
                require_address = rs.getString("address");
                require_fee = rs.getString("feeStructure");
                require_year = rs.getString("year");
-               c.closeConnection(con, ps, rs); 
-               //System.out.println("requirements are "+cgpa+address+fee+year);
+               other_requirement1 = rs.getString("other_requirement1");
+               other_requirement2 = rs.getString("other_requirement2");
+               other_requirement3 = rs.getString("other_requirement3");                
+               c.closeConnection(con, ps, rs);                
                if(require_fee.equals("y") & require_address.equals("n") & require_cgpa.equals("n") & require_year.equals("n")) {
+                   if(other_requirement1.equals("n")){
                    System.out.println("Only fee structure required. ");
                    CreateCertificate cc = new CreateCertificate();
                    cc.create(sc, null);
+                   }
+                   else{
+                       new OtherRequirements(sc, null).setVisible(true);
+                   }
                }
                else if((require_cgpa.equals("y") & require_address.equals("y")) || (require_cgpa.equals("y") & require_year.equals("y")) || (require_year.equals("y") & require_address.equals("y"))){
                    new AllRequired(sc).setVisible(true); 
@@ -178,7 +184,7 @@ public class SecondClass {
            }
            //this.dispose();
        }
-       catch(Exception ex){JOptionPane.showMessageDialog(null, ex);}
+       catch(Exception ex){JOptionPane.showMessageDialog(null, "Problem in identifing type!!! "+ex);}
        finally{c.closeConnection(con, ps, rs);}         
   
     }   
@@ -200,4 +206,7 @@ public class SecondClass {
    private String require_address;
    private String require_fee;
    private String require_year;
+   private String other_requirement1;
+   private String other_requirement2;
+   private String other_requirement3;
 }

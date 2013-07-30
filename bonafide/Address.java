@@ -47,6 +47,7 @@ public class Address extends javax.swing.JFrame {
         local_ta = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         permanent_ta = new javax.swing.JTextArea();
+        back_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +70,13 @@ public class Address extends javax.swing.JFrame {
         permanent_ta.setRows(5);
         jScrollPane2.setViewportView(permanent_ta);
 
+        back_button.setText("Back");
+        back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,15 +97,20 @@ public class Address extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back_button)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addContainerGap()
+                        .addComponent(back_button)
+                        .addGap(32, 32, 32)
                         .addComponent(local))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -119,8 +132,19 @@ public class Address extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
-    new CreateCertificate().create(sc, new AllRequiredClass(local_ta.getText(), permanent_ta.getText()));
+    AllRequiredClass arc = new AllRequiredClass(local_ta.getText(), permanent_ta.getText());
+    if(!sc.getOther_requirement1().equals("n")){
+        new OtherRequirements(sc, arc).setVisible(true);
+        this.dispose();
+    }
+ else{
+    new CreateCertificate().create(sc, arc);
+    }
 }//GEN-LAST:event_create_buttonActionPerformed
+
+private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
+    new Second(sc).setVisible(true); 
+}//GEN-LAST:event_back_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +182,7 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back_button;
     private javax.swing.JButton create_button;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

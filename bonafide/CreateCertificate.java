@@ -60,6 +60,11 @@ public class CreateCertificate {
                  to_deliver = c.splitJoin(to_deliver, "{admission year}", Integer.toString(obj.getAdmission_year()));
                  to_deliver = c.splitJoin(to_deliver, "{completion year}", Integer.toString(obj.getCompletion_year()));  
             }
+            System.out.println("sc.getOther_requirement1() is "+sc.getOther_requirement1());
+            if(!sc.getOther_requirement1().equals("n")){
+                System.out.println("to replace"+obj.getTo_replace1()+" by replace"+obj.getBy_replace());
+                to_deliver = c.splitJoin(to_deliver, sc.getOther_requirement1(), obj.getBy_replace());
+            }
             /*
             else{                         
                 to_deliver = c.splitJoin(to_deliver, "{birth date}", obj.getBirth_date());
@@ -87,8 +92,8 @@ public class CreateCertificate {
         
     // Step-5 Now code for jasper reports:    
        try{ 
-        Connection conn =  DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db");
-        net.sf.jasperreports.engine.design.JasperDesign jasperDesign = net.sf.jasperreports.engine.xml.JRXmlLoader.load("E:\\PD\\pd\\pratice\\Bonafide\\src\\bonafide\\report1.jrxml");
+        Connection conn =  DriverManager.getConnection("jdbc:sqlite:./src/bonafide/bonafide.db");
+        net.sf.jasperreports.engine.design.JasperDesign jasperDesign = net.sf.jasperreports.engine.xml.JRXmlLoader.load("./src/bonafide/report1.jrxml");
         String sql = "select * from toDeliver order by date DESC LIMIT 1"; 
       
       net.sf.jasperreports.engine.design.JRDesignQuery newQuery = new net.sf.jasperreports.engine.design.JRDesignQuery();
