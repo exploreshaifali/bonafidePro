@@ -255,6 +255,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="birth_place_tf">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birth_place_tfActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="birth_date_tf">
     </Component>

@@ -59,11 +59,18 @@ public class CreateCertificate {
             if(sc.getRequire_year().equals("y")){
                  to_deliver = c.splitJoin(to_deliver, "{admission year}", Integer.toString(obj.getAdmission_year()));
                  to_deliver = c.splitJoin(to_deliver, "{completion year}", Integer.toString(obj.getCompletion_year()));  
+                 to_deliver = c.splitJoin(to_deliver, "{pursuing sem}", Integer.toString(obj.getPursuing_sem())); 
             }
             System.out.println("sc.getOther_requirement1() is "+sc.getOther_requirement1());
             if(!sc.getOther_requirement1().equals("n")){
                 System.out.println("to replace"+obj.getTo_replace1()+" by replace"+obj.getBy_replace());
                 to_deliver = c.splitJoin(to_deliver, sc.getOther_requirement1(), obj.getBy_replace());
+            }
+            if(!sc.getOther_requirement2().equals("n")){               
+                to_deliver = c.splitJoin(to_deliver, sc.getOther_requirement2(), obj.getBy_replace());
+            }
+            if(!sc.getOther_requirement3().equals("n")){                
+                to_deliver = c.splitJoin(to_deliver, sc.getOther_requirement3(), obj.getBy_replace());
             }
             /*
             else{                         
@@ -84,7 +91,7 @@ public class CreateCertificate {
    try{     
        c = new Connect();
         con = c.getConnection();
-        ps =con.prepareStatement("insert into toDeliver (op) values( '"+to_deliver+"')");        
+        ps =con.prepareStatement("insert into toDeliver (op, course, sem) values( '"+to_deliver+"', '"+sc.getCourse()+"', "+sc.getSemester()+")");        
         ps.executeUpdate();
         c.closeConnection(con, ps, null);
    }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in delivering data!! "+e);}
@@ -92,10 +99,10 @@ public class CreateCertificate {
         
     // Step-5 Now code for jasper reports:    
        try{ 
-        Connection conn =  DriverManager.getConnection("jdbc:sqlite:./src/bonafide/bonafide.db");
-        net.sf.jasperreports.engine.design.JasperDesign jasperDesign = net.sf.jasperreports.engine.xml.JRXmlLoader.load("./src/bonafide/report1.jrxml");
-        String sql = "select * from toDeliver order by date DESC LIMIT 1"; 
-      
+        Connection conn =  DriverManager.getConnection("jdbc:sqlite:bonafide.db");
+        net.sf.jasperreports.engine.design.JasperDesign jasperDesign = net.sf.jasperreports.engine.xml.JRXmlLoader.load("GenerateReport.jrxml");
+        //String sql = "select * from toDeliver, PI where course = course_name and toDeliver.sem <= PI.sem order by date DESC LIMIT 1"; 
+      String sql = "select * from toDeliver order by date DESC LIMIT 1";
       net.sf.jasperreports.engine.design.JRDesignQuery newQuery = new net.sf.jasperreports.engine.design.JRDesignQuery();
       newQuery.setText(sql);
       jasperDesign.setQuery(newQuery);
@@ -103,9 +110,23 @@ public class CreateCertificate {
       net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(jasperReport, null, conn);
       net.sf.jasperreports.view.JasperViewer.viewReport(jasperPrint);  
       
-      conn.close();        
+      conn.close();     
     }
-    catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in generating report! "+e);}   
+    catch (net.sf.jasperreports.engine.JRException e){e.printStackTrace();}
+    catch (SQLException e){e.printStackTrace();}
+    catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in generating report! "+e);} 
+       
+   //sending issued certificate on web
+  try{       
+    c = new Connect();
+    con = c.getConnection();
+    ps = con.prepareStatement("select op from toDeliver, PI where course = course_name and toDeliver.sem <= PI.sem order by date DESC LIMIT 1");
+    rs = ps.executeQuery();
+    new EmailTest().sendMail(rs.getString("op")); 
+    c.closeConnection(con, ps, rs); 
+  }
+  catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in generating report! "+e);} 
+       
   }
     
     

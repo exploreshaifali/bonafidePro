@@ -73,6 +73,14 @@ public class SecondClass {
     public String getOther_requirement1() {
         return other_requirement1;
     }
+
+    public String getOther_requirement2() {
+        return other_requirement2;
+    }
+
+    public String getOther_requirement3() {
+        return other_requirement3;
+    }
     
     //setter methods
     public void setCert_type(String cert_type) {
@@ -130,7 +138,7 @@ public class SecondClass {
   public void identifyTypeAndMove( SecondClass sc){
     //Identifing the type and moving to concerned type of certificate.
        //Step-1 knowing that the ctype have requirements or not.
-       try{
+       try{           
            c = new Connect();
            con = c.getConnection();
            ps = con.prepareStatement("select requirements from type where typeName = '"+cert_type+"'");
@@ -143,9 +151,8 @@ public class SecondClass {
                cc.create(sc, null); 
            }
            else{
-               //Step-2closing connection with type and connecting with requirements table.                          
-               c.closeConnection(null, ps, rs);
-               System.out.println("Working till here");
+               //Step-2closing connection with type and connecting with requirements table.                                         
+               c.closeConnection(null, ps, rs);               
                ps = con.prepareStatement("select * from requirements where typeName = '"+cert_type+"'");               
                rs = ps.executeQuery();               
                require_cgpa = rs.getString("cgpaSgpa");
@@ -155,7 +162,8 @@ public class SecondClass {
                other_requirement1 = rs.getString("other_requirement1");
                other_requirement2 = rs.getString("other_requirement2");
                other_requirement3 = rs.getString("other_requirement3");                
-               c.closeConnection(con, ps, rs);                
+               c.closeConnection(con, ps, rs);  
+               System.out.println(require_cgpa+require_address+require_fee+require_year);
                if(require_fee.equals("y") & require_address.equals("n") & require_cgpa.equals("n") & require_year.equals("n")) {
                    if(other_requirement1.equals("n")){
                    System.out.println("Only fee structure required. ");
@@ -177,6 +185,9 @@ public class SecondClass {
                }
                else if(require_year.equals("y")){
                    new YearOnly(sc).setVisible(true);
+               }
+               else if(!other_requirement1.equals("n") || !other_requirement2.equals("n") || !other_requirement3.equals("n")){
+                   new OtherRequirements(sc).setVisible(true);
                }
                else{
                    new YearOnly().setVisible(true);

@@ -47,8 +47,7 @@ public class ChangePassword extends javax.swing.JFrame {
             }
         });
 
-        backb.setIcon(new javax.swing.ImageIcon("E:\\PD\\pd\\pratice\\Bonafide\\bkOption.jpg")); // NOI18N
-        backb.setText("jButton1");
+        backb.setText("Back");
         backb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbActionPerformed(evt);
@@ -76,8 +75,8 @@ public class ChangePassword extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(backb, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addComponent(backb)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(pass_pf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -17,28 +17,28 @@ import javax.activation.*;
  * @author student
  */
 public class EmailTest {
-     public static void main(String args[])  {
+     public void sendMail(String content)  {
     String host = "smtp.gmail.com";
     String from = "shaifaliagrawal@iips.edu.in";
-    String pass = "pass";
+    String pass = "kalyanidevi";
     Properties props = System.getProperties();
     props.put("mail.smtp.user", from);
     props.put("mail.smtp.host", host);
-    props.put("mail.smtp.port", "25"); //25
+    props.put("mail.smtp.port", "25"); 
     props.put("mail.debug", "true");
     props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true"); // added this line
+    props.put("mail.smtp.starttls.enable", "true"); 
     props.put("mail.smtp.EnableSSL.enable","true");
 
     props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-props.setProperty("mail.smtp.socketFactory.fallback", "false");
-props.setProperty("mail.smtp.port", "465");
-props.setProperty("mail.smtp.socketFactory.port", "465");
+    props.setProperty("mail.smtp.socketFactory.fallback", "false");
+    props.setProperty("mail.smtp.port", "465");
+    props.setProperty("mail.smtp.socketFactory.port", "465");
     props.put("mail.smtp.password", pass);
     //props.put("mail.smtp.starttls.required", true);
    
 
-    String[] to = {"shaifaliagrawal@iips.edu.in"}; // added this line
+    String[] to = {"shaifaliagrawal@iips.edu.in"}; 
 
     Session session = Session.getDefaultInstance(props, null);
     MimeMessage message = new MimeMessage(session);
@@ -51,13 +51,13 @@ props.setProperty("mail.smtp.socketFactory.port", "465");
     for( int i=0; i < to.length; i++ ) { // changed from a while loop
         toAddress[i] = new InternetAddress(to[i]);
     }
-    System.out.println(Message.RecipientType.TO);
+    //System.out.println(Message.RecipientType.TO);
 
     for( int i=0; i < toAddress.length; i++) { // changed from a while loop
         message.addRecipient(Message.RecipientType.TO, toAddress[i]);
     }
-    message.setSubject("sending in a group");
-    message.setText("Welcome to JavaMail");
+    message.setSubject("Bonafide Issued");
+    message.setText(content);
     Transport transport = session.getTransport("smtp");
     transport.connect(host, from, pass);
     transport.sendMessage(message, message.getAllRecipients());
@@ -68,6 +68,9 @@ props.setProperty("mail.smtp.socketFactory.port", "465");
             mex.printStackTrace();
     }
     }
+public static void main(String args[]){
+    
+}
 
 
 // Send a simple, single part, text/plain e-mail

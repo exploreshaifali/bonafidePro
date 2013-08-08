@@ -45,6 +45,12 @@ public class AddNewUser extends javax.swing.JFrame {
 
         namel.setText("Name");
 
+        nametf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nametfActionPerformed(evt);
+            }
+        });
+
         back_button.setText("Back");
         back_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +205,10 @@ private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     new Login().setVisible(true);
     this.dispose();
 }//GEN-LAST:event_logout_buttonActionPerformed
+
+private void nametfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nametfActionPerformed
+    add_buttonActionPerformed(evt);
+}//GEN-LAST:event_nametfActionPerformed
 
     /**
      * @param args the command line arguments

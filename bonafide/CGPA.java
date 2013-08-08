@@ -183,7 +183,7 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     else if(cgpa < 0.0 || sgpa < 0.0){
         javax.swing.JOptionPane.showMessageDialog(null, "CGPA/SGPA can't be less than 0.0");
     }
-    else if((Integer)pursuing_sem_combo.getSelectedItem() != ((Integer)in_sem_combo.getSelectedItem() + 1)){
+    else if((Integer)pursuing_sem_combo.getSelectedItem() <= ((Integer)in_sem_combo.getSelectedItem())){
         javax.swing.JOptionPane.showMessageDialog(null, "pursuing semester can be only the next of previous one.");
     }
     else{

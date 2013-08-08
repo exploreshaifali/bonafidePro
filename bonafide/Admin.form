@@ -160,6 +160,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="update_pi" min="-2" max="-2" attributes="0"/>
                           <Component id="update_type_format_button" min="-2" max="-2" attributes="0"/>
+                          <Component id="update_fees_button" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -199,7 +200,9 @@
               </Group>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="update_fees_button" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="update_type_format_button" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="update_pi" min="-2" max="-2" attributes="0"/>
@@ -280,6 +283,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update_type_format_buttonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="update_fees_button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update Fees"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

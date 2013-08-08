@@ -277,6 +277,8 @@ private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     fullform_tf.setText("");
     years_tf.setText("");
     sem_tf.setText(""); 
+    pi1_tf.setText(""); 
+    panel1.setVisible(false);  
     till_sem1_combo.setModel(null); 
     course_name_tf.requestFocus();
 }//GEN-LAST:event_reset_buttonActionPerformed

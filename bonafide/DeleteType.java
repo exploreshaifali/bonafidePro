@@ -129,7 +129,7 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 //code to enable foreign key constratints on sqlite3:
                 org.sqlite.SQLiteConfig config = new org.sqlite.SQLiteConfig();  
                 config.enforceForeignKeys(true);                  
-                con = java.sql.DriverManager.getConnection("jdbc:sqlite:./src/bonafide/bonafide.db", config.toProperties());
+                con = java.sql.DriverManager.getConnection("jdbc:sqlite:bonafide.db", config.toProperties());
             //con.execute("PRAGMA foreign_keys = ON");
             ps = con.prepareStatement("delete from type where typeName = '"+s+"'");
             ps.executeUpdate();

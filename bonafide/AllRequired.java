@@ -97,6 +97,12 @@ public class AllRequired extends javax.swing.JFrame {
 
         jLabel8.setText("Permanent Address");
 
+        birth_place_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birth_place_tfActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Birth Place");
 
         jLabel10.setText("Birth Date");
@@ -224,69 +230,22 @@ private void generate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//G
     AllRequiredClass rc = new AllRequiredClass(Integer.parseInt(addmission_year_tf.getText()), Integer.parseInt(completion_year_tf.getText()), Float.parseFloat(cgpa_tf.getText()), Float.parseFloat(sgpa_tf.getText()),Integer.parseInt(in_sem.getSelectedItem().toString()), Integer.parseInt(pursuing_sem.getSelectedItem().toString()),local_address_ta.getText(), permanent_address_ta.getText(), birth_date_tf.getText(),birth_place_tf.getText());
     //validations
     //creating certificate
-    new CreateCertificate().create(sc, rc); 
-    
-    
-    /*
-    //Step-1  Fetching formate from type table.
-   try{
-       c = new Connect();
-       java.sql.Connection con = c.getConnection();
-       
-       java.sql.PreparedStatement ps = con.prepareStatement("select formate from type where typeName = 'Student Bonafide'");
-       java.sql.ResultSet rs = ps.executeQuery();
-       if(rs.next()){
-          formate = rs.getString("formate") ;
-       }
-       else{
-           javax.swing.JOptionPane.showMessageDialog(null, "Internal error formate type or Certificate type not found.");
-       }
-       
-       c.closeConnection(con, ps, rs); 
-       System.out.println("Step 1 completed!!!");
-   }catch(Exception e){
-       javax.swing.JOptionPane.showMessageDialog(null, "Closing rs or ps for step 1"+e);
-   }
+    if(!sc.getOther_requirement1().equals("n") || !sc.getOther_requirement2().equals("n") || !sc.getOther_requirement3().equals("n")){
+       new OtherRequirements(sc).setVisible(true);
+    }
+    else{
+        new CreateCertificate().create(sc, rc); 
+    }   
    
-   //Step-2 Fetching data which is last entered in firstInfo table.
-   try{
-       c = new Connect();
-       java.sql.Connection con = c.getConnection();
-       
-       java.sql.PreparedStatement ps = con.prepareStatement("select * from firstInfo order by date desc limit 1");
-       java.sql.ResultSet rs2= ps.executeQuery();
-        rs2.next();
-        name= rs2.getString("name");
-        rollnum = rs2.getString("rollnum");
-        father_name = rs2.getString("father_name"); 
-        course = rs2.getString("course");
-        semester = rs2.getString("sem");
-        
-        
-        //System.out.println(name+rollnum+father_name);
-        c.closeConnection(con, ps, rs2);
-        System.out.println("Step 2 completed!!!");
-   }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in step 2"+e);}
-   
-   //Step-3 Merging data with formate
-   try{
-       c = new Connect();
-       to_deliver = c.splitJoin(formate, "{name}", name);
-       to_deliver = c.splitJoin(to_deliver, "{roll}", rollnum);
-       to_deliver = c.splitJoin(to_deliver, "{father}", father_name);
-       to_deliver = c.splitJoin(to_deliver, "{course}", course);
-       to_deliver = c.splitJoin(to_deliver, "{semester}", semester);
-       System.out.println(to_deliver);
-       
-       System.out.println("Step 3 completed!!!");
-   }catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem while merging!"+e);}
-     * 
-     */
 }//GEN-LAST:event_generate_buttonActionPerformed
 
 private void addmission_year_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmission_year_tfActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_addmission_year_tfActionPerformed
+
+private void birth_place_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birth_place_tfActionPerformed
+    generate_buttonActionPerformed(evt);
+}//GEN-LAST:event_birth_place_tfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,14 +308,6 @@ private void addmission_year_tfActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JComboBox pursuing_sem;
     private javax.swing.JTextField sgpa_tf;
     // End of variables declaration//GEN-END:variables
-    private String formate;
-    private String father_name;
-    private String rollnum;
-    private String name;
-    private String course;
-    private String semester;
-    private String to_deliver;
-    
     private Connect c;
     private SecondClass sc;
 }

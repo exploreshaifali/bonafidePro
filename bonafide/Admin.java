@@ -27,6 +27,7 @@ public class Admin extends javax.swing.JFrame {
         delete_course_button = new javax.swing.JButton();
         update_pi = new javax.swing.JButton();
         update_type_format_button = new javax.swing.JButton();
+        update_fees_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         file_menu = new javax.swing.JMenu();
         back_file_menu = new javax.swing.JMenuItem();
@@ -110,6 +111,8 @@ public class Admin extends javax.swing.JFrame {
                 update_type_format_buttonActionPerformed(evt);
             }
         });
+
+        update_fees_button.setText("Update Fees");
 
         file_menu.setText("File");
 
@@ -211,7 +214,8 @@ public class Admin extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(update_pi)
-                            .addComponent(update_type_format_button))
+                            .addComponent(update_type_format_button)
+                            .addComponent(update_fees_button))
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(delete_typeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -240,7 +244,9 @@ public class Admin extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(delete_course_button))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(55, 55, 55)
+                .addComponent(update_fees_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(update_type_format_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(update_pi)
@@ -383,6 +389,7 @@ private void update_type_format_buttonActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JMenuBar menubar;
     private javax.swing.JButton new_typeb;
+    private javax.swing.JButton update_fees_button;
     private javax.swing.JButton update_pi;
     private javax.swing.JButton update_type_format_button;
     private javax.swing.JMenuItem user_add_menu;

@@ -15,7 +15,7 @@ public class Connect {
         try
         {
             Class.forName("org.sqlite.JDBC");
-            java.sql.Connection con = java.sql.DriverManager.getConnection("jdbc:sqlite:./src/bonafide/bonafide.db");
+            java.sql.Connection con = java.sql.DriverManager.getConnection("jdbc:sqlite:bonafide.db");
             return con;
         }catch(Exception e){
              javax.swing.JOptionPane.showMessageDialog(null, "Problem in connecting with database. "+e);             

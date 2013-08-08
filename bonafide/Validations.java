@@ -61,7 +61,7 @@ public boolean isVallidYear(String s){
     }   
 
 public boolean isVallidName(String s){
-    if(s.length() < 6 || s.length() > 40){
+    if(s.length() < 5 || s.length() > 40){
         System.out.println("lenght problem");
         return false;
     }

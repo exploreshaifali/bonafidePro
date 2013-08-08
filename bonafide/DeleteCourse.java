@@ -123,14 +123,14 @@ private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
        }
        int reply = javax.swing.JOptionPane.showConfirmDialog(null, message,"Delete Course", javax.swing.JOptionPane.YES_NO_OPTION);
        if(reply == javax.swing.JOptionPane.YES_OPTION){
-        //deleting all selected userids from database
+        //deleting all selected userids from database           
         for(String one_selected_course : all_selected){
             try{
                 Class.forName("org.sqlite.JDBC");
                 //code to enable foreign key constratints on sqlite3:
                 org.sqlite.SQLiteConfig config = new org.sqlite.SQLiteConfig();  
                 config.enforceForeignKeys(true);  
-                con = java.sql.DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/ishant0/bonafide.db", config.toProperties());
+                con = java.sql.DriverManager.getConnection("jdbc:sqlite:bonafide.db", config.toProperties());
                 
             //con.execute("PRAGMA foreign_keys = ON");
             ps = con.prepareStatement("delete from course where name = '"+one_selected_course+"'");

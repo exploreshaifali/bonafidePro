@@ -104,9 +104,18 @@ public class AllRequiredClass{
     public String getBy_replace() {
         return by_replace1;
     }
+    
  //Setter methods
     public void setBy_replace1(String by_replace1) {
         this.by_replace1 = by_replace1;
+    }
+
+    public void setBy_replace2(String by_replace2) {
+        this.by_replace2 = by_replace2;
+    }
+
+    public void setBy_replace3(String by_replace3) {
+        this.by_replace3 = by_replace3;
     }
 
     
@@ -126,4 +135,6 @@ public class AllRequiredClass{
     private String other_reqiurement1;
     private String to_replace1;
     private String by_replace1;
+    private String by_replace2;
+    private String by_replace3;
 }
