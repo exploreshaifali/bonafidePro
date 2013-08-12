@@ -38,26 +38,51 @@ public class CreateCertificate {
        to_deliver = c.splitJoin(to_deliver, "{roll}", sc.getRollnum());
        to_deliver = c.splitJoin(to_deliver, "{father}", sc.getFather_name());
        to_deliver = c.splitJoin(to_deliver, "{course}",  c.getFullFormOfcourse(sc.getCourse()));
-       to_deliver = c.splitJoin(to_deliver, "{sem}",Integer.toString(sc.getSemester())); 
+       to_deliver = c.splitJoin(to_deliver, "{sem}",Integer.toString(sc.getSemester()));   
+       //Since Enrollment NO. is optional checking if it is entered or not.
+       if(sc.getEnrollment().trim().length() == 0){
+           int index = to_deliver.indexOf(" & Enrollment");
+           to_deliver = to_deliver.substring(0, index) + to_deliver.substring(index+29);
+       }
+       else{
        to_deliver = c.splitJoin(to_deliver, "{enrollment}", sc.getEnrollment());
+       }                       
        to_deliver = c.splitJoin(to_deliver, "{yr}", c.getYearsofCourse(sc.getCourse(), "Problem in fetching period of course from database. "));
        System.out.println("Inside step 3.");
-       if(ob != null){
-            System.out.println((ob.getClass()).getName());
+       if(ob != null){            
             AllRequiredClass obj = (AllRequiredClass)ob; 
             if(sc.getRequire_cgpa().equals("y")){ 
                 System.out.println("Kya bhai m in");               
-                to_deliver = c.splitJoin(to_deliver, "{cgpa}",Float.toString(obj.getCgpa()));
-                to_deliver = c.splitJoin(to_deliver, "{sgpa}", Float.toString(obj.getSgpa()));
+                to_deliver = c.splitJoin(to_deliver, "{cgpa}",Float.toString(obj.getCgpa()));   
+                //Since SGPA is optional
+                if(obj.getSgpa() == 0.0){                     
+                    int index = to_deliver.indexOf(" and SGPA");                   
+                    to_deliver = to_deliver.substring(0, index) + to_deliver.substring(index+19);
+                }
+                else{
+                    to_deliver = c.splitJoin(to_deliver, "{sgpa}", Float.toString(obj.getSgpa()));
+                }
                 to_deliver = c.splitJoin(to_deliver, "{in sem}", Integer.toString(obj.getIn_sem()));
                 to_deliver = c.splitJoin(to_deliver, "{pursuing sem}", Integer.toString(obj.getPursuing_sem()));              
             }
             if(sc.getRequire_address().equals("y")) {
                 to_deliver = c.splitJoin(to_deliver, "{local address}", obj.getLocal_address());
                 to_deliver = c.splitJoin(to_deliver, "{permanent address}", obj.getPermanent_address()); 
-            }
+            }            
             if(sc.getRequire_year().equals("y")){
-                 to_deliver = c.splitJoin(to_deliver, "{admission year}", Integer.toString(obj.getAdmission_year()));
+                //In many Certificate types Only completion year is used!.
+                System.out.println("Addmission year"+obj.getAdmission_year());
+                if(obj.getAdmission_year() == 0){
+                    //when addmission year us mentioned in formate:
+                    int index = to_deliver.indexOf("starting from year");
+                    if(index == -1){}
+                    else{
+                        to_deliver = to_deliver.substring(0, index) + "in year" + to_deliver.substring(index+38);
+                    }
+                }
+                else{
+                    to_deliver = c.splitJoin(to_deliver, "{admission year}", Integer.toString(obj.getAdmission_year()));
+                }                 
                  to_deliver = c.splitJoin(to_deliver, "{completion year}", Integer.toString(obj.getCompletion_year()));  
                  to_deliver = c.splitJoin(to_deliver, "{pursuing sem}", Integer.toString(obj.getPursuing_sem())); 
             }
@@ -117,6 +142,7 @@ public class CreateCertificate {
     catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in generating report! "+e);} 
        
    //sending issued certificate on web
+       /*
   try{       
     c = new Connect();
     con = c.getConnection();
@@ -127,6 +153,8 @@ public class CreateCertificate {
   }
   catch(Exception e){javax.swing.JOptionPane.showMessageDialog(null, "Problem in generating report! "+e);} 
        
+        * 
+        */
   }
     
     

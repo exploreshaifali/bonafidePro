@@ -14,7 +14,8 @@ public class YearOnly extends javax.swing.JFrame {
         this.sc = sc;
         initComponents();
         this.setTitle("Year"); 
-        admission_year_tf.requestFocus();       
+        admission_year_tf.requestFocus();  
+        new Connect().putSemestersFromDatabaseToComboBox(sc.getCourse(), pursuing_semester_combo, "Problem in showing Semesters of this course. ");
     }
 
     /**
@@ -35,7 +36,7 @@ public class YearOnly extends javax.swing.JFrame {
         completion_year_tf = new javax.swing.JTextField();
         back_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        pursuing_semester = new javax.swing.JComboBox();
+        pursuing_semester_combo = new javax.swing.JComboBox();
 
         jButton1.setText("jButton1");
 
@@ -47,6 +48,11 @@ public class YearOnly extends javax.swing.JFrame {
         create_botton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 create_bottonActionPerformed(evt);
+            }
+        });
+        create_botton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                create_bottonKeyPressed(evt);
             }
         });
 
@@ -63,7 +69,7 @@ public class YearOnly extends javax.swing.JFrame {
 
         jLabel3.setText("Pursuing semester");
 
-        pursuing_semester.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", " " }));
+        pursuing_semester_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +85,7 @@ public class YearOnly extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pursuing_semester, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pursuing_semester_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(admission_year_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                                 .addComponent(completion_year_tf))))
@@ -107,7 +113,7 @@ public class YearOnly extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(pursuing_semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pursuing_semester_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(create_botton)
                 .addGap(39, 39, 39))
@@ -124,22 +130,37 @@ public class YearOnly extends javax.swing.JFrame {
     }//GEN-LAST:event_back_buttonActionPerformed
 
 private void create_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_bottonActionPerformed
-    admission_year = Integer.parseInt(admission_year_tf.getText());
-    completion_year = Integer.parseInt(completion_year_tf.getText());
-    if(admission_year < completion_year){
-        AllRequiredClass arc = new AllRequiredClass(admission_year, completion_year, Integer.parseInt((String)pursuing_semester.getSelectedItem()));
+    actionPerformed();
+}//GEN-LAST:event_create_bottonActionPerformed
+
+private void create_bottonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_create_bottonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_create_bottonKeyPressed
+
+void actionPerformed(){
+    if(admission_year_tf.getText().trim().length() == 0){       
+    }
+    else{
+        admission_year = Integer.parseInt(admission_year_tf.getText());
+    }
+    completion_year = Integer.parseInt(completion_year_tf.getText());            
+    if(admission_year < completion_year){        
+        AllRequiredClass arc = new AllRequiredClass(admission_year, completion_year, (Integer)pursuing_semester_combo.getSelectedItem());
         if(!sc.getOther_requirement1().equals("n")){
         new OtherRequirements(sc, arc).setVisible(true);
         this.dispose();
     }
- else{
+ else{ 
     new CreateCertificate().create(sc, arc);
     }    
     }
     else{
         javax.swing.JOptionPane.showMessageDialog(null, "Admission year should be lesser than Completion year. ");
     }
-}//GEN-LAST:event_create_bottonActionPerformed
+}
 
     /**
      * @param args the command line arguments
@@ -185,7 +206,7 @@ private void create_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JComboBox pursuing_semester;
+    private javax.swing.JComboBox pursuing_semester_combo;
     // End of variables declaration//GEN-END:variables
     
     private SecondClass sc;     

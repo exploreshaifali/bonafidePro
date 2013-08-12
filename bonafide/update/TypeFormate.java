@@ -89,6 +89,11 @@ public class TypeFormate extends javax.swing.JFrame {
                 update_buttonActionPerformed(evt);
             }
         });
+        update_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                update_buttonKeyPressed(evt);
+            }
+        });
 
         back_button.setText("Back");
         back_button.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +107,7 @@ public class TypeFormate extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(168, Short.MAX_VALUE)
+                .addContainerGap(179, Short.MAX_VALUE)
                 .addComponent(back_button)
                 .addGap(74, 74, 74)
                 .addComponent(update_button)
@@ -158,6 +163,10 @@ private void format_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_format_comboActionPerformed
 
 private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_update_buttonActionPerformed
+
+void actionPerformed(){
     c = new bonafide.Connect();
     try{
     con = c.getConnection();
@@ -173,12 +182,19 @@ private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
       finally{
           c.closeConnection(con, ps, rs);
       }
-}//GEN-LAST:event_update_buttonActionPerformed
+}
 
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
     new bonafide.Admin().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_back_buttonActionPerformed
+
+private void update_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_update_buttonKeyPressed
 
     /**
      * @param args the command line arguments

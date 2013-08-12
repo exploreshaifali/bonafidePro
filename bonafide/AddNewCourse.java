@@ -71,6 +71,11 @@ public class AddNewCourse extends javax.swing.JFrame {
                 add_buttonActionPerformed(evt);
             }
         });
+        add_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                add_buttonKeyPressed(evt);
+            }
+        });
 
         reset_button.setText("Reset");
         reset_button.addActionListener(new java.awt.event.ActionListener() {
@@ -234,6 +239,10 @@ public class AddNewCourse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_add_buttonActionPerformed
+
+void actionPerformed(){
     course_name = course_name_tf.getText();
     String fullform = fullform_tf.getText();
     String years = years_tf.getText();    
@@ -253,24 +262,12 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 int till_sem2 = (Integer)till_sem2_combo.getSelectedItem();
                 String pi2 = pi2_tf.getText();
                 add_pi1.putToDatabase("insert into PI values('"+course_name+"', "+till_sem2+", '"+pi2+"')", null, "Problem in adding another Program incharage.");
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            }           
             new Admin().setVisible(true); 
             this.dispose();
     }
     else{javax.swing.JOptionPane.showMessageDialog(null, "Years can only have numbers/floats.");}
-}//GEN-LAST:event_add_buttonActionPerformed
+}
 
 private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_buttonActionPerformed
     course_name_tf.setText("");
@@ -322,6 +319,13 @@ private void till_sem1_comboActionPerformed(java.awt.event.ActionEvent evt) {//G
     till_sem2_combo.setModel(new javax.swing.DefaultComboBoxModel(entries.toArray(new Integer[0])));
     }
 }//GEN-LAST:event_till_sem1_comboActionPerformed
+
+private void add_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_add_buttonKeyPressed
 
     /**
      * @param args the command line arguments

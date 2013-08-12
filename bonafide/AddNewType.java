@@ -58,6 +58,11 @@ public class AddNewType extends javax.swing.JFrame {
                 addbActionPerformed(evt);
             }
         });
+        addb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                addbKeyPressed(evt);
+            }
+        });
 
         jLabel3.setText("Requirement other than name, roll num, father name, course, semester.");
 
@@ -163,6 +168,10 @@ private boolean isInitialsCorrect(){
         return true;
 }
 private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_addbActionPerformed
+
+void actionPerformed(){
     if(isInitialsCorrect()){
     // Inserting Type and formate in type table..
     try{        
@@ -227,7 +236,7 @@ private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
     else{
         javax.swing.JOptionPane.showMessageDialog(null, "Name and Formate can't be blank.");    
     }
-}//GEN-LAST:event_addbActionPerformed
+}
 
 private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbActionPerformed
     Admin f = new Admin();
@@ -251,6 +260,13 @@ private void requirementYes(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_re
 private void yesrbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesrbActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_yesrbActionPerformed
+
+private void addbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addbKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_addbKeyPressed
 
     /**
      * @param args the command line arguments

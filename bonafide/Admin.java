@@ -113,6 +113,11 @@ public class Admin extends javax.swing.JFrame {
         });
 
         update_fees_button.setText("Update Fees");
+        update_fees_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_fees_buttonActionPerformed(evt);
+            }
+        });
 
         file_menu.setText("File");
 
@@ -272,12 +277,12 @@ private void backbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 }//GEN-LAST:event_backbActionPerformed
 
 private void delete_typebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_typebActionPerformed
-    new DeleteType().setVisible(true); 
+    new bonafide.delete.Type().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_delete_typebActionPerformed
 
 private void delete_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_user_buttonActionPerformed
-    new DeleteUser().setVisible(true); 
+    new bonafide.delete.User().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_delete_user_buttonActionPerformed
 
@@ -287,7 +292,7 @@ private void add_course_buttonActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_add_course_buttonActionPerformed
 
 private void delete_course_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_course_buttonActionPerformed
-    new DeleteCourse().setVisible(true); 
+    new bonafide.delete.Course().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_delete_course_buttonActionPerformed
 
@@ -311,12 +316,12 @@ private void user_add_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_user_add_menuActionPerformed
 
 private void certificate_type_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certificate_type_delete_menuActionPerformed
-    new DeleteType().setVisible(true); 
+    new bonafide.delete.Type().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_certificate_type_delete_menuActionPerformed
 
 private void user_delete_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_delete_menuActionPerformed
-    new DeleteUser().setVisible(true); 
+    new bonafide.delete.User().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_user_delete_menuActionPerformed
 
@@ -329,6 +334,11 @@ private void update_type_format_buttonActionPerformed(java.awt.event.ActionEvent
     new bonafide.update.TypeFormate().setVisible(true); 
     this.dispose();
 }//GEN-LAST:event_update_type_format_buttonActionPerformed
+
+private void update_fees_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_fees_buttonActionPerformed
+    new bonafide.update.Fees().setVisible(true); 
+    this.dispose();
+}//GEN-LAST:event_update_fees_buttonActionPerformed
 
     /**
      * @param args the command line arguments

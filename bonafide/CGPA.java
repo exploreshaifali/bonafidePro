@@ -70,6 +70,11 @@ public class CGPA extends javax.swing.JFrame {
                 create_buttonActionPerformed(evt);
             }
         });
+        create_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                create_buttonKeyPressed(evt);
+            }
+        });
 
         back_button.setText("Back");
         back_button.addActionListener(new java.awt.event.ActionListener() {
@@ -108,11 +113,12 @@ public class CGPA extends javax.swing.JFrame {
                                 .addGap(40, 40, 40)
                                 .addComponent(jRadioButton2))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -133,13 +139,11 @@ public class CGPA extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(cgpa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel3))
-                    .addComponent(sgpa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sgpa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -175,8 +179,23 @@ public class CGPA extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_create_buttonActionPerformed
+
+private void create_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_create_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_create_buttonKeyPressed
+
+void actionPerformed(){
     cgpa = Float.parseFloat(cgpa_tf.getText());
-    sgpa = Float.parseFloat(sgpa_tf.getText());
+    if(sgpa_tf.getText().trim().length() == 0){
+       
+    }else{
+        sgpa = Float.parseFloat(sgpa_tf.getText());
+    }  
     if(cgpa > 10.0 || sgpa > 10.0){
         javax.swing.JOptionPane.showMessageDialog(null, "CGPA/SGPA can't be greater than 10.0");
     }
@@ -196,7 +215,7 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     new CreateCertificate().create(sc, arc);
     }    
     }
-}//GEN-LAST:event_create_buttonActionPerformed
+}
 
     /**
      * @param args the command line arguments

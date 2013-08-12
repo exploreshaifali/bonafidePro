@@ -76,6 +76,11 @@ public class AllRequired extends javax.swing.JFrame {
                 generate_buttonActionPerformed(evt);
             }
         });
+        generate_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                generate_buttonKeyPressed(evt);
+            }
+        });
 
         jLabel3.setText("Pursuing semester");
 
@@ -226,6 +231,10 @@ private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 //for generating certificate..
 private void generate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_buttonActionPerformed
+     actionPerformed();   
+}//GEN-LAST:event_generate_buttonActionPerformed
+
+void actionPerformed(){
     //creating object of class allRequiredClass
     AllRequiredClass rc = new AllRequiredClass(Integer.parseInt(addmission_year_tf.getText()), Integer.parseInt(completion_year_tf.getText()), Float.parseFloat(cgpa_tf.getText()), Float.parseFloat(sgpa_tf.getText()),Integer.parseInt(in_sem.getSelectedItem().toString()), Integer.parseInt(pursuing_sem.getSelectedItem().toString()),local_address_ta.getText(), permanent_address_ta.getText(), birth_date_tf.getText(),birth_place_tf.getText());
     //validations
@@ -235,9 +244,8 @@ private void generate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
     else{
         new CreateCertificate().create(sc, rc); 
-    }   
-   
-}//GEN-LAST:event_generate_buttonActionPerformed
+    }
+}
 
 private void addmission_year_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmission_year_tfActionPerformed
 // TODO add your handling code here:
@@ -246,6 +254,13 @@ private void addmission_year_tfActionPerformed(java.awt.event.ActionEvent evt) {
 private void birth_place_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birth_place_tfActionPerformed
     generate_buttonActionPerformed(evt);
 }//GEN-LAST:event_birth_place_tfActionPerformed
+
+private void generate_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_generate_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_generate_buttonKeyPressed
 
     /**
      * @param args the command line arguments

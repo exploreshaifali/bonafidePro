@@ -25,6 +25,7 @@ public class NewPassword extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         new_password_pf = new javax.swing.JPasswordField();
         pf2 = new javax.swing.JPasswordField();
+        ok_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,19 +39,36 @@ public class NewPassword extends javax.swing.JFrame {
             }
         });
 
+        ok_button.setText("OK");
+        ok_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ok_buttonActionPerformed(evt);
+            }
+        });
+        ok_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ok_buttonKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pf2)
-                    .addComponent(new_password_pf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pf2)
+                            .addComponent(new_password_pf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(ok_button)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,15 +82,20 @@ public class NewPassword extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(pf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(ok_button)
+                .addGap(62, 62, 62))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
+    actionPerformed();
+}//GEN-LAST:event_DUMMY
 
-     if(Arrays.equals(new_password_pf.getPassword(), pf2.getPassword())){
+void actionPerformed(){
+    if(Arrays.equals(new_password_pf.getPassword(), pf2.getPassword())){
          try{
              ps = con.prepareStatement("update login set pass = '"+new_password_pf.getPassword().toString()+"'");
              ps.close();
@@ -90,7 +113,18 @@ private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
         pf2.setText("");
         new_password_pf.requestFocus();
       }
-}//GEN-LAST:event_DUMMY
+}
+
+private void ok_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ok_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_ok_buttonKeyPressed
+
+private void ok_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ok_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_ok_buttonActionPerformed
 
     public static void main(String args[]) {
         
@@ -129,6 +163,7 @@ private void DUMMY(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DUMMY
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField new_password_pf;
+    private javax.swing.JButton ok_button;
     private javax.swing.JPasswordField pf2;
     // End of variables declaration//GEN-END:variables
     private java.sql.Connection con;

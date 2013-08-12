@@ -42,6 +42,11 @@ public class AddNewUser extends javax.swing.JFrame {
                 add_buttonActionPerformed(evt);
             }
         });
+        add_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                add_buttonKeyPressed(evt);
+            }
+        });
 
         namel.setText("Name");
 
@@ -145,9 +150,14 @@ public class AddNewUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_add_buttonActionPerformed
+
+void actionPerformed(){
     String name = nametf.getText();
+    StringBuilder error = new StringBuilder();
     Validations v = new Validations();
-    if(v.isVallidName(name)){
+    if(v.isVallidName(name, error)){
     java.sql.Connection con;
         java.sql.PreparedStatement ps;
         java.sql.ResultSet rs;
@@ -184,9 +194,9 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }  
     }
     else{
-        javax.swing.JOptionPane.showMessageDialog(null, "Name is not vallid.");          
+        javax.swing.JOptionPane.showMessageDialog(null, error);          
     }
-}//GEN-LAST:event_add_buttonActionPerformed
+}
 
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
     Admin f = new Admin();
@@ -209,6 +219,13 @@ private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void nametfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nametfActionPerformed
     add_buttonActionPerformed(evt);
 }//GEN-LAST:event_nametfActionPerformed
+
+private void add_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_add_buttonKeyPressed
 
     /**
      * @param args the command line arguments

@@ -1,6 +1,7 @@
 package bonafide;
 
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -80,6 +81,11 @@ public class Second extends javax.swing.JFrame {
         SaveC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveCActionPerformed(evt);
+            }
+        });
+        SaveC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SaveCKeyPressed(evt);
             }
         });
 
@@ -287,12 +293,16 @@ public class Second extends javax.swing.JFrame {
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     private void SaveCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCActionPerformed
+         actionPerformedonSaveC();                  
+    }//GEN-LAST:event_SaveCActionPerformed
+    //SaveCActionPerformed all tasks wrote outside so that it will work on Enter key also.
+    void actionPerformedonSaveC(){
         int flage = 1;
-        String error = "";
+        StringBuilder error = new StringBuilder();
         //fetching data what user entered.
        String name = nametf.getText(); 
        String rollnum = rollnumtf.getText();
-       String father_name = father_nametf.getText();
+       String father_name = father_nametf.getText();       
        //Providing validations
        Validations v = new Validations(); 
        //checking that roll number or name is not empty.
@@ -301,17 +311,19 @@ public class Second extends javax.swing.JFrame {
        }
        else{
            //Checking for vallid rollnumber
-           if(!v.isVallidRollnumber(rollnum)){
-               error += "Rollnumber is not vallid(must be of atleast 9 length and can have only 0-9A-Za-z-)!";
+           if(!v.isVallidRollnumber(rollnum, error)){
+               flage = 0;              
            }
            //Checking for vallid names
-        if(!v.isVallidName(name)){
-           flage = 0;
-           error += "Name can contain only A-Za-z.- and total length must be more than 6\n";
+        if(!v.isVallidName(name, error)){
+           flage = 0;           
         }
-        if(!v.isVallidName(father_name)){
-            flage = 0;
-           error += "father name can contain only A-Za-z.- and total length must be more than 6\n";
+        if(!v.isVallidName(father_name, error)){
+            flage = 0;            
+            if(error.length() == 0){
+                StringBuilder sb = new StringBuilder("Father ").append(error);
+                error = sb;          
+            }
         }
         if(flage == 0){
             JOptionPane.showMessageDialog(null, error);
@@ -323,8 +335,8 @@ public class Second extends javax.swing.JFrame {
            sc.identifyTypeAndMove(sc);           
            this.dispose();       
        }         
-       }                   
-    }//GEN-LAST:event_SaveCActionPerformed
+       }
+    }
     
    //Moving to More Information page or class    .
     private void more_information_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_more_information_buttonActionPerformed
@@ -341,41 +353,25 @@ private void change_password_buttonActionPerformed(java.awt.event.ActionEvent ev
 
 //When user Press enter after entering roll umber all rest of the data fields will be filled!!..............Not exactly correct yet.......
 private void rollnumtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollnumtfActionPerformed
-        /*try{
-            
-            con = Connect.getConnection();
-            
-            ps =con.prepareStatement("select * from firstInfo where rollnum = '"+rollnumtf.getText().toUpperCase()+"'");
-            rs = ps.executeQuery();
-            
-            int i = 0;
-            if(rs.next()){
-              i = 1;
-              nametf.setText(rs.getString("name"));
-              course_combo.setSelectedItem(rs.getString("course"));
-              ctype_combo.setSelectedItem(rs.getString("ctype"));
-              sem_combo.setSelectedItem(rs.getInt("sem"));
-             }
-                        
-            while (rs.next()){
-                    i++;
-            } 
-           
-        }
-        catch(Exception ex){
-                 ex.printStackTrace();
-                 javax.swing.JOptionPane.showMessageDialog(null, ex);
-                }
-        finally{
-           try{
-               Connect.closeConnection(con, ps, rs);
-           }catch(Exception e){
-               JOptionPane.showMessageDialog(null, "Problem in closing connection "+e);
-           }
+    c = new Connect();    
+    try{
+        con = c.getConnection();    
+        ps =con.prepareStatement("select * from firstInfo where rollnum = '"+rollnumtf.getText().toUpperCase()+"' order by date DESC LIMIT 1");
+        rs = ps.executeQuery();                  
+        if(rs.next()){        
+          nametf.setText(rs.getString("name"));              
+          course_combo.setSelectedItem(rs.getString("course"));
+          ctype_combo.setSelectedItem(rs.getString("ctype"));
+          sem_combo.setSelectedItem(rs.getInt("sem"));
+          father_nametf.setText(rs.getString("father_name"));
+          enrollment_tf.setText(rs.getString("enrollment")); 
+          }
+     }
+    catch(Exception ex){
+         ex.printStackTrace();
+         javax.swing.JOptionPane.showMessageDialog(null, "Problem while searching from database."+ex);
     }
-     * 
-     */
-        
+    finally{ c.closeConnection(con, ps, rs);}
 }//GEN-LAST:event_rollnumtfActionPerformed
 
 private void course_comboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_course_comboItemStateChanged
@@ -404,6 +400,13 @@ private void father_nametfActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void enrollment_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollment_tfActionPerformed
     SaveCActionPerformed(evt);
 }//GEN-LAST:event_enrollment_tfActionPerformed
+
+private void SaveCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SaveCKeyPressed
+    int k = evt.getKeyCode();
+	if(k == KeyEvent.VK_ENTER){
+            actionPerformedonSaveC();
+	}   
+}//GEN-LAST:event_SaveCKeyPressed
 
 private void fettingFromDB(){
     c = new Connect();

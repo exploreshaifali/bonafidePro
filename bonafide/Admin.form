@@ -288,6 +288,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Fees"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update_fees_buttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

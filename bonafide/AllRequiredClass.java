@@ -42,7 +42,7 @@ public class AllRequiredClass{
         this.permanent_address = permanent_address;
     }
 
-    public AllRequiredClass(int admission_year, int completion_year, int pursuing_sem) {
+    public AllRequiredClass(int admission_year, int completion_year, int pursuing_sem) {       
         this.admission_year = admission_year;
         this.completion_year = completion_year;
         this.pursuing_sem = pursuing_sem;

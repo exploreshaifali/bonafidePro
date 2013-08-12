@@ -60,32 +60,44 @@ public boolean isVallidYear(String s){
         return r;
     }   
 
-public boolean isVallidName(String s){
-    if(s.length() < 5 || s.length() > 40){
-        System.out.println("lenght problem");
+public boolean isVallidName(String name, StringBuilder error){
+    if(name.trim().length() < 4 || name.trim().length() > 40){
+        error.append(" Name length must be in between 4-40.");
         return false;
     }
-    return s.matches("^[A-Za-z\\s.-]+");
+    if(!name.matches("^[A-Za-z\\s.-]+")){
+        error.append(" Name can have only characters.");
+        return false;
+    }
+    return true;
 }
 
-public boolean isVallidRollnumber(String s){
-    if(s.length() < 9 || s.length() > 15){
-        return false;
+public boolean isVallidRollnumber(String rollnum, StringBuilder error){    
+    if(rollnum.trim().length() < 8 || rollnum.trim().length() > 15){ 
+        error.append(" Rollnumber length must be greater than 8 and smaller than 15");
+        return false;        
     }
     //atleast one character
-    if(s.matches(".*^[A-Za-z]+.*")){
-        System.out.println("not a single character!!");
-        return false;
+    if(!rollnum.matches(".*^[A-Za-z]+.*")){
+        error.append(" Rollnumber must start with alphabate.");
+        return false;    
     }
     //atleast one number
-    if(!s.matches(".*\\d.*")){
-        System.out.println("not a single digit!");
+    if(!rollnum.matches(".*\\d.*")){        
+        error.append(" Rollnumber must contain digits also.");
         return false;
     }
-    if(s.matches("(.)\\1,2{3,}(\\b)")){
+    if(rollnum.matches("(.)\\1,2{3,}(\\b)")){  
+        error.append("Error####");
+        return false;
+    }  
+    //Cannot have ant special character other than '-'.
+    if (!rollnum.matches("^[A-Za-z0-9-/]+")){
+        error.append(" Rollnumber cannot have any special character other than '-'.");
         return false;
     }
-    return s.matches("^[A-Za-z0-9-/]+");
+    return true;
+     
 }
 
 

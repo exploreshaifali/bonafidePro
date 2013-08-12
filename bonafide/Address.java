@@ -61,6 +61,11 @@ public class Address extends javax.swing.JFrame {
                 create_buttonActionPerformed(evt);
             }
         });
+        create_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                create_buttonKeyPressed(evt);
+            }
+        });
 
         local_ta.setColumns(20);
         local_ta.setRows(5);
@@ -132,6 +137,10 @@ public class Address extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_create_buttonActionPerformed
+
+void actionPerformed(){
     AllRequiredClass arc = new AllRequiredClass(local_ta.getText(), permanent_ta.getText());
     if(!sc.getOther_requirement1().equals("n")){
         new OtherRequirements(sc, arc).setVisible(true);
@@ -140,11 +149,18 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
  else{
     new CreateCertificate().create(sc, arc);
     }
-}//GEN-LAST:event_create_buttonActionPerformed
+}
 
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
     new Second(sc).setVisible(true); 
 }//GEN-LAST:event_back_buttonActionPerformed
+
+private void create_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_create_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_create_buttonKeyPressed
 
     /**
      * @param args the command line arguments

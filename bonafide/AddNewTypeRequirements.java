@@ -100,6 +100,11 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
                 add_buttonActionPerformed(evt);
             }
         });
+        add_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                add_buttonKeyPressed(evt);
+            }
+        });
 
         cgpa_sgpa_cb.setText("CGPA/SGPA");
 
@@ -233,6 +238,10 @@ public class AddNewTypeRequirements extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_add_buttonActionPerformed
+
+void actionPerformed(){
     //http://stackoverflow.com/questions/5541570/array-of-checkboxes-in-java
     //fetching values of user requirements
     if (cgpa_sgpa_cb.isSelected()){
@@ -304,11 +313,18 @@ private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             rc.setOther_requirement2(other_requirement2); 
             rc.setOther_requirement3(other_requirement3); 
     this.dispose();
-}//GEN-LAST:event_add_buttonActionPerformed
+}
 
 private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
     this.dispose();
 }//GEN-LAST:event_back_buttonActionPerformed
+
+private void add_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_add_buttonKeyPressed
 
 
     /**

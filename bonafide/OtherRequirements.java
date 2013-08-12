@@ -78,6 +78,11 @@ public void toShow(){
                 create_buttonActionPerformed(evt);
             }
         });
+        create_button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                create_buttonKeyPressed(evt);
+            }
+        });
 
         need2_label.setText("need2");
 
@@ -176,6 +181,10 @@ public void toShow(){
     }// </editor-fold>//GEN-END:initComponents
 
 private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
+    actionPerformed();
+}//GEN-LAST:event_create_buttonActionPerformed
+
+void actionPerformed(){
     by_replace1 = need1_tf.getText();
     by_replace2 = need2_tf.getText();
     by_replace3 = need3_tf.getText();
@@ -188,7 +197,7 @@ private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     arc.setBy_replace3(by_replace3);
  }
     new CreateCertificate().create(sc, arc);
-}//GEN-LAST:event_create_buttonActionPerformed
+}
 
 private void need1_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_need1_tfActionPerformed
     create_buttonActionPerformed(evt);
@@ -201,6 +210,13 @@ private void need2_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void need3_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_need3_tfActionPerformed
     create_buttonActionPerformed(evt);
 }//GEN-LAST:event_need3_tfActionPerformed
+
+private void create_buttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_create_buttonKeyPressed
+    int k = evt.getKeyCode();
+	if(k == java.awt.event.KeyEvent.VK_ENTER){
+            actionPerformed();
+	}
+}//GEN-LAST:event_create_buttonKeyPressed
 
 
 /*private void getToReplace1(){
